@@ -43,7 +43,7 @@ export default {
       PassWord: '',
       id: '',
 
-      msg: '欢迎来到京西商城'
+      msg: '==欢迎来到京西商城'
     }
   },
 
