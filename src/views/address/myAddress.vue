@@ -53,9 +53,11 @@
                 itemList: []
             }
         },
+
         mounted() {
             this.getData();
         },
+
         methods: {
             getData() {
                 axios.get('/receiver/list/userId='+this.getUserId)

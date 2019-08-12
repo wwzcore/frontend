@@ -69,27 +69,28 @@
                 if(this.phoneInput.length !== 11){
                     alert("请输入正确的手机号。")
                 }else {
-                    await axios.post('/receiver/add/', {
-                        receiverId: document.getElementById("id").value,
-                        userId:1,
-                        receiverName: document.getElementById("name").value,
-                        receiverPhone: document.getElementById("phone").value,
-                        receiverAddressInfo: document.getElementById("address").value
+
+                                await axios.post('/receiver/add/', {
+                    receiverId: document.getElementById("id").value,
+                    userId:1,
+                    receiverName: document.getElementById("name").value,
+                    receiverPhone: document.getElementById("phone").value,
+                    receiverAddressInfo: document.getElementById("address").value
                 })
                     .then(function (response) {
                         console.log(response);
+                        window.location.href = "/myAddress";
                     })
                     .catch(function (error) {
                         console.log(error);
+                        alert("输入的信息有误！");
                     });
-                    window.location.href = "/myAddress";
                 }
             }
 
         }
     }
 </script>
-
 
 
 <style lang="stylus">
