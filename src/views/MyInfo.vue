@@ -7,7 +7,7 @@
 <script>
 export default {
   name: 'MyInfo',
-  data () {
+  data() {
     return {
       msg: '个人信息',
     };
