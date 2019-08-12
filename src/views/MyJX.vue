@@ -3,7 +3,7 @@
     <div id="nav">
       <img src="@/assets/logo.png"/>
       <h1>{{ msg }}</h1>
-      <router-link tag="a" :to="'/myinfo'" >个人资料</router-link>
+      <router-link to="/myinfo" >个人资料</router-link> |
       <router-link to="/myAddress" >收货地址</router-link>
     </div>
     <router-view/>
