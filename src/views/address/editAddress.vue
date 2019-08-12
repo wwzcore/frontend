@@ -86,11 +86,11 @@
                 window.location.href = "/address";
             },
 
-            _save: async function () {
+            _save: function () {
                 if(this.item.receiverPhone.length !== 11){
                     alert("请输入正确的手机号。")
                 }else {
-                    await axios.put('/receiver/updReceiver/', {
+                    axios.put('/receiver/updReceiver/', {
                         receiverId: this.item.receiverId,
                         userId: this.item.userId,
                         receiverName: this.item.receiverName,

@@ -47,23 +47,19 @@
 
     methods: {
 
-      commit: async function postData () {
-         await axios.post('http://localhost:5000/interface/', {
-
+      commit: function postData () {
+         axios.post('http://localhost:5000/interface/', {
           name: document.getElementById('AcctNo').value,
-
           phone: document.getElementById('PassWord').value,
           id: document.getElementById('id').value
         })
-
-                .then(function (response) {
-                  console.log(response)
-                })
-
-                .catch(function (error) {
-                  console.log(error)
-                });
-        window.location.href = '/myjx'
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error)
+          });
+        window.location.href = '/myjx';
       }
     }
   };
