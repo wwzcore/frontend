@@ -30,12 +30,12 @@ export default new Router({
             component: Register
         },
         {
-            path: '/myinfo',
-            name: 'MyInfo',
+            path: '/UserInfo',
+            name: 'UserInfo',
             // route level code-splitting
             // this generates a separate chunk (about.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
-            component: () => import(/* webpackChunkName: "address" */ './views/MyInfo.vue')
+            component: () => import(/* webpackChunkName: "address" */ './views/UserInfo.vue')
         },
         {
             path: '/myAddress',

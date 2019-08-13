@@ -818,8 +818,8 @@ aws4@^1.8.0:
 
 axios@^0.19.0:
   version "0.19.0"
-  resolved "https://registry.npm.taobao.org/axios/download/axios-0.19.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Faxios%2Fdownload%2Faxios-0.19.0.tgz#8e09bff3d9122e133f7b8101c8fbdd00ed3d2ab8"
-  integrity sha1-jgm/89kSLhM/e4EByPvdAO09Krg=
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.0.tgz#8e09bff3d9122e133f7b8101c8fbdd00ed3d2ab8"
+  integrity sha512-1uvKqKQta3KBxIz14F2v06AEHZ/dIoeKfbTRkK1E5oqjDnuEerLmYTgJB5AiQZHJcljpg1TuRzdjDR06qNk0DQ==
   dependencies:
     follow-redirects "1.5.10"
     is-buffer "^2.0.2"
@@ -4870,8 +4870,8 @@ json-schema@0.2.3:
 
 json-server@^0.15.0:
   version "0.15.0"
-  resolved "https://registry.npm.taobao.org/json-server/download/json-server-0.15.0.tgz#b8b0840077e46f15608e9eff2c34fc4d63d19139"
-  integrity sha1-uLCEAHfkbxVgjp7/LDT8TWPRkTk=
+  resolved "https://registry.yarnpkg.com/json-server/-/json-server-0.15.0.tgz#b8b0840077e46f15608e9eff2c34fc4d63d19139"
+  integrity sha512-mo9CuRVoEzJ82g/IaxU0ljSKgPpRoj6rYiJoDIUK7VEqplOca2Saq6eTwmRULRgPiRe4hHC0aYB9tNKJUAQGgQ==
   dependencies:
     body-parser "^1.19.0"
     chalk "^2.4.2"

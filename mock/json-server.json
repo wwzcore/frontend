@@ -1,0 +1,11 @@
+{
+  "port": 5000,
+  "watch": true,
+  "static": "./public",
+  "read-only": false,
+  "no-cors": false,
+  "no-gzip": false,
+  "routes": "route.json"
+}
+
+

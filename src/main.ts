@@ -5,7 +5,7 @@ import axios from 'axios'
 
 Vue.config.productionTip = false;
 
-axios.defaults.baseURL = 'http://localhost:8080';    //这里写我们后端接口的根路径
+axios.defaults.baseURL = 'http://localhost:5000';    //这里写我们后端接口的根路径
 Vue.prototype.axios = axios;
 
 new Vue({
