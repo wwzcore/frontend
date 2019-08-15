@@ -33,7 +33,7 @@
         <router-link tag="a" :to="'/register'">注册</router-link>
     </div>
     <div class="loginimgcss" >
-        <img border="10"  src="../assets/jingxi.png" alt="LoginImage" >
+        <img border="0"  src="../assets/jingxi.png" alt="LoginImage" >
     </div>
     </div>
 </template>
