@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+<<<<<<< HEAD
     <div v-show="getUserName">
       <div style="float: right">
         <span>用户名：{{getUserName}}</span>
@@ -14,6 +15,9 @@
       </div>
     </div>
     <router-view/>
+=======
+    <router-view />
+>>>>>>> 7d9a93e8dde73c47cd14c06d2ddb98f290dca633
   </div>
 </template>
 
@@ -46,6 +50,7 @@
 </script>
 
 <style lang="stylus">
+<<<<<<< HEAD
 #app
   font-family 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing antialiased
@@ -66,4 +71,13 @@
     margin: 0 10px
   a
     color: #42b983
+=======
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+>>>>>>> 7d9a93e8dde73c47cd14c06d2ddb98f290dca633
 </style>

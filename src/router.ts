@@ -34,13 +34,18 @@ export default new Router({
             component: Register
         },
         {
+<<<<<<< HEAD
             path: '/myInfo',
             name: 'MyInfo',
             meta:{auth:true},
+=======
+            path: '/UserInfo',
+            name: 'UserInfo',
+>>>>>>> 7d9a93e8dde73c47cd14c06d2ddb98f290dca633
             // route level code-splitting
             // this generates a separate chunk (about.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
-            component: () => import(/* webpackChunkName: "address" */ './views/MyInfo.vue')
+            component: () => import(/* webpackChunkName: "address" */ './views/UserInfo.vue')
         },
         {
             path: '/myAddress',

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "user": [
     {
       "name": "11",
@@ -7,3 +8,27 @@
     }
   ]
 }
+=======
+  "userInfo": [
+    {
+      "id": "1",
+      "UserPhone": "1111111111",
+      "UserName": "张艺榕",
+      "UserNickname": "dd",
+      "UserEmail": "qq@qq.com",
+      "UserRealname": "eeeee",
+      "UserSex": "eee"
+    }
+  ],
+  "userelse": [
+    {
+      "UserName": "张艺榕",
+      "UserPhone": 1111111111,
+      "UserNickname": "",
+      "UserEmail": "",
+      "UserRealname": "",
+      "UserSex": ""
+    }
+  ]
+}
+>>>>>>> 7d9a93e8dde73c47cd14c06d2ddb98f290dca633
