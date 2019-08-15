@@ -1,24 +1,39 @@
 <template>
   <div id="MyJX">
-    <div id="nav">
-      <img src="@/assets/logo.png"/>
+
+    <div>
+      <img src="../assets/logo.png" alt=""/>
       <h1>{{ msg }}</h1>
-      <router-link tag="a" :to="'/myinfo'" >个人资料</router-link>
-      <router-link to="/myAddress" >收货地址</router-link>
     </div>
+
     <router-view/>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'MyJX',
-  data() {
-    return {
-      msg: '我的京西',
-    };
-  }
-};
+
+  export default {
+
+    name: 'MyJX',
+
+    data() {
+      return {
+        getUserName:"",
+        msg: '我的京西'
+      };
+    },
+
+    mounted() {
+      this.getUserName = sessionStorage.getItem("getUserName");
+    },
+
+    methods: {
+      _out:function() {
+
+      }
+    }
+  };
+
 </script>
 
 
@@ -31,16 +46,4 @@ export default {
   text-align center
   color #2c3e50
 
-#nav
-  padding 30px
-  h1, h2
-    font-weight: normal
-  ul
-    list-style-type: none
-    padding: 0
-  li
-    display: inline-block
-    margin: 0 10px
-  a
-    color: #42b983
 </style>

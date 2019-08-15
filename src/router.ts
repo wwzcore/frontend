@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import router from './router';
 
 import MyJX from './views/MyJX.vue';
 
@@ -17,12 +18,15 @@ export default new Router({
         {
             path: '/',
             name: 'Login',
+            meta:{auth:true},
             component: Login
         },
         {
-            path: '/myjx',
+            path: '/myJx',
             name: 'MyJX',
+            meta:{auth:true},
             component: MyJX
+
         },
         {
             path: '/register',
@@ -30,8 +34,9 @@ export default new Router({
             component: Register
         },
         {
-            path: '/myinfo',
+            path: '/myInfo',
             name: 'MyInfo',
+            meta:{auth:true},
             // route level code-splitting
             // this generates a separate chunk (about.[hash].js) for this route
             // which is lazy-loaded when the route is visited.
@@ -40,17 +45,40 @@ export default new Router({
         {
             path: '/myAddress',
             name: 'MyaAddress',
+            meta:{auth:true},
             component: () => import(/* webpackChunkName: "address" */ './views/address/myAddress.vue')
         },
         {
             path: '/address/newAdd',
             name: 'NewAdd',
+            meta:{auth:true},
             component: NewAdd
         },
         {
             path: '/address/editAddress',
             name: 'EditAddress',
+            meta:{auth:true},
             component: EditAddress
         }
     ]
 })
+
+router.beforeEach((to,from,next) => {
+    if(to.matched.some(m => m.meta.auth)){
+        // console.log("先判断是否登陆")；
+        if(to.name == "Login"){
+            next();
+        }else {
+            if(sessionStorage.getItem("getUserName")){
+                // 访问服务器缓存数据，判断当前data是否失效
+                next();
+            }else {
+                alert("您的登陆已过期，请重新登陆。");
+                next("/");
+            }
+        }
+    }else {
+        console.log("请先登陆");
+        next();
+    }
+});
