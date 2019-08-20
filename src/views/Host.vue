@@ -2,7 +2,7 @@
   <div class="container">
     <header class="header">
       <div class="image">
-        <img alt="logo" src="../assets/header.jpg" style="width:50px;height: 50px;" />
+        <img alt="logo" src="../assets/suancai.jpg" style="width:50px;height: 50px;" />
       </div>
       <div class="link">
         <ul class="linkin">
