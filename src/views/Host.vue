@@ -16,32 +16,29 @@
       </div>
     </header>
     <main>
-
       <p>show</p>
-      <Browsing/>
-
+      <Browsing />
     </main>
     <footer>
       <p>Here's some contact info</p>
     </footer>
-
   </div>
 </template>
 
 <script>
-import Browsing from '@/components/Browsing.vue'
+import Browsing from "@/components/Browsing.vue";
 export default {
-  name: 'Host',
+  name: "Host",
   components: {
     Browsing
   },
 
-  data () {
+  data() {
     return {
-      getUserName: ''
-    }
+      getUserName: ""
+    };
   }
-}
+};
 </script>
 
 <style lang="stylus">
@@ -89,5 +86,4 @@ a:link, a:visited {
 a:hover, a:active {
   background-color: #5E5E5E;
 }
-
 </style>
