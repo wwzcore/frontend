@@ -16,26 +16,32 @@
       </div>
     </header>
     <main>
-      <img class="suancai" alt="suancai" src="../assets/suancai.jpg" />
-      <p>A paragraph for the main content.</p>
-      <p>And another one.</p>
+
+      <p>show</p>
+      <Browsing/>
+
     </main>
     <footer>
       <p>Here's some contact info</p>
     </footer>
+
   </div>
 </template>
 
 <script>
+import Browsing from '@/components/Browsing.vue'
 export default {
-  name: "App",
+  name: 'Host',
+  components: {
+    Browsing
+  },
 
-  data() {
+  data () {
     return {
-      getUserName: ""
-    };
+      getUserName: ''
+    }
   }
-};
+}
 </script>
 
 <style lang="stylus">
@@ -83,5 +89,5 @@ a:link, a:visited {
 a:hover, a:active {
   background-color: #5E5E5E;
 }
-.suancai{}
+
 </style>
