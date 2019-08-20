@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import router from './router'
+import Host from './views/Host.vue'
 
 import MyJX from './views/MyJX.vue'
 
@@ -17,6 +18,12 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'Host',
+      meta: { auth: true },
+      component: Host
+    },
+    {
+      path: '/login',
       name: 'Login',
       meta: { auth: true },
       component: Login
@@ -66,7 +73,7 @@ export default new Router({
 router.beforeEach((to, from, next) => {
   if (to.matched.some(m => m.meta.auth)) {
     // console.log("先判断是否登陆")；
-    if (to.name === 'Login') {
+    if (to.name === 'Host') {
       next()
     } else {
       if (sessionStorage.getItem('getUserName')) {
