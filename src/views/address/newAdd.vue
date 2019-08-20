@@ -42,93 +42,89 @@
 
 <script>
 
-    import axios from "axios";
+import axios from 'axios'
 
-    export default {
+export default {
 
-        name: "newAdd",
+  name: 'newAdd',
 
-        data() {
-            return {
-                namePrompt:"",
-                phonePrompt:"",
-                addressPrompt:"",
+  data () {
+    return {
+      namePrompt: '',
+      phonePrompt: '',
+      addressPrompt: '',
 
-
-                // 送给后端的json对象
-                receiverId:"",
-                userId:"",
-                receiverName: "",
-                receiverPhone: "",
-                receiverAddressInfo: ""
-            }
-        },
-
-        mounted() {
-            this.getUserName = sessionStorage.getItem("getUserName");
-        },
-
-        methods: {
-            checkName() {
-                return this.receiverName === this.receiverName.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi, '');
-            },
-
-            _inputName: function () {
-                if (!this.checkName()) {
-                    this.namePrompt = "用户名只能为数字和字母的组合";
-                    this.receiverName = this.receiverName.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi, '');
-                } else {
-                    this.namePrompt = "";
-                }
-            },
-
-            _inputPhone: function(){
-                this.receiverPhone = this.receiverPhone.replace(/[^\d]/g, '');
-                this.phonePrompt = "";
-            },
-
-            _inputAddress: function(){
-                this.addressPrompt = "";
-            },
-
-            _cancel:function(){
-                window.location.href = "/myAddress";
-            },
-
-            _commit: function(){
-
-                if(!this.receiverName){
-                    this.namePrompt = "姓名不能为空";
-                } else if (!this.checkName()) {
-                    this.namePrompt = "用户名只能为数字和字母的组合";
-                }else if(this.receiverPhone.length !== 11){
-                    this.phonePrompt = "请输入正确的手机号";
-                }else if(!this.receiverAddressInfo){
-                    this.addressPrompt = "收货地址不能为空";
-                }else{
-                    axios.post('/receiver/add/userName=' + this.getUserName, {
-                        receiverId: "", // 系统自动生成
-                        userId: "",     // 在后端从user表中得到userId
-                        receiverName: this.receiverName,
-                        receiverPhone: this.receiverPhone,
-                        receiverAddressInfo: this.receiverAddressInfo,
-                })
-                .then(function (response) {
-                    console.log(response);
-                    window.location.href = "/myAddress";
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    alert("输入信息格式不正确。");
-                });
-                }
-            }
-
-        }
+      // 送给后端的json对象
+      receiverId: '',
+      userId: '',
+      receiverName: '',
+      receiverPhone: '',
+      receiverAddressInfo: ''
     }
+  },
+
+  mounted () {
+    this.getUserName = sessionStorage.getItem('getUserName')
+  },
+
+  methods: {
+    checkName () {
+      return this.receiverName === this.receiverName.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi, '')
+    },
+
+    _inputName: function () {
+      if (!this.checkName()) {
+        this.namePrompt = '用户名只能为数字和字母的组合'
+        this.receiverName = this.receiverName.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi, '')
+      } else {
+        this.namePrompt = ''
+      }
+    },
+
+    _inputPhone: function () {
+      this.receiverPhone = this.receiverPhone.replace(/[^\d]/g, '')
+      this.phonePrompt = ''
+    },
+
+    _inputAddress: function () {
+      this.addressPrompt = ''
+    },
+
+    _cancel: function () {
+      window.location.href = '/myAddress'
+    },
+
+    _commit: function () {
+      if (!this.receiverName) {
+        this.namePrompt = '姓名不能为空'
+      } else if (!this.checkName()) {
+        this.namePrompt = '用户名只能为数字和字母的组合'
+      } else if (this.receiverPhone.length !== 11) {
+        this.phonePrompt = '请输入正确的手机号'
+      } else if (!this.receiverAddressInfo) {
+        this.addressPrompt = '收货地址不能为空'
+      } else {
+        axios.post('/receiver/add/userName=' + this.getUserName, {
+          receiverId: '', // 系统自动生成
+          userId: '', // 在后端从user表中得到userId
+          receiverName: this.receiverName,
+          receiverPhone: this.receiverPhone,
+          receiverAddressInfo: this.receiverAddressInfo
+        })
+          .then(function (response) {
+            console.log(response)
+            window.location.href = '/myAddress'
+          })
+          .catch(function (error) {
+            console.log(error)
+            alert('输入信息格式不正确。')
+          })
+      }
+    }
+
+  }
+}
 </script>
-
-
 
 <style lang="stylus">
     #newAdd

@@ -35,69 +35,67 @@
 </div>
 </template>
 
-
 <script>
-    import axios from "axios";
+import axios from 'axios'
 
-    export default {
+export default {
 
-        name: "myAddress",
+  name: 'myAddress',
 
-        data() {
-            return {
-                getUserName:"",
-                radioId:"",
-                itemList: []
-            }
-        },
-        mounted() {
-            this.getUserName = sessionStorage.getItem("getUserName");
-            this.getData();
-        },
-
-        methods: {
-
-            getData() {
-                axios.get('/receiver/list/userName='+this.getUserName)
-                    .then(response => {
-                    //this.itemList = JSON.parse(response.data);
-                    this.itemList = response.data;
-                    console.log(typeof response.data);
-                   })
-                    .catch(function (error) {
-                    console.log(error);
-                   });
-            },
-
-            _revise: function(index){
-                window.location.href = "/address/editAddress?id="+index;
-            },
-
-            _commit: function(){
-                // 待开发中。。。
-                alert("开发中，敬请期待！");
-            },
-
-            _add: function(){
-                window.location.href = "/address/newAdd";
-            },
-
-            _delete: function(radioId){
-                console.log('被选中的值为:'+ radioId);
-                axios.delete('/receiver/delReceiver/userName='+this.getUserName+'&receiverId='+radioId)
-                    .then(function (response) {
-                        console.log(response);
-                        window.location.reload();
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            }
-
-        }
+  data () {
+    return {
+      getUserName: '',
+      radioId: '',
+      itemList: []
     }
-</script>
+  },
+  mounted () {
+    this.getUserName = sessionStorage.getItem('getUserName')
+    this.getData()
+  },
 
+  methods: {
+
+    getData () {
+      axios.get('/receiver/list/userName=' + this.getUserName)
+        .then(response => {
+          // this.itemList = JSON.parse(response.data);
+          this.itemList = response.data
+          console.log(typeof response.data)
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    },
+
+    _revise: function (index) {
+      window.location.href = '/address/editAddress?id=' + index
+    },
+
+    _commit: function () {
+      // 待开发中。。。
+      alert('开发中，敬请期待！')
+    },
+
+    _add: function () {
+      window.location.href = '/address/newAdd'
+    },
+
+    _delete: function (radioId) {
+      console.log('被选中的值为:' + radioId)
+      axios.delete('/receiver/delReceiver/userName=' + this.getUserName + '&receiverId=' + radioId)
+        .then(function (response) {
+          console.log(response)
+          window.location.reload()
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    }
+
+  }
+}
+</script>
 
 <style lang="stylus" scoped>
     #myAddress

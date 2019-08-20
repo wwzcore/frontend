@@ -40,94 +40,93 @@
 </template>
 
 <script>
-    import axios from "axios";
+import axios from 'axios'
 
-    export default {
+export default {
 
-        name: "editAddress",
+  name: 'editAddress',
 
-        data() {
-            return {
-                namePrompt:"",
-                phonePrompt:"",
-                addressPrompt:"",
+  data () {
+    return {
+      namePrompt: '',
+      phonePrompt: '',
+      addressPrompt: '',
 
-                item: ""
-            }
-        },
-
-        mounted() {
-            this.getUserName = sessionStorage.getItem("getUserName");
-            this.getData();
-        },
-
-        methods: {
-            getData() {
-                let r = this.$route.query.id;
-                axios.get('/receiver/list/userName=' + this.getUserName).then(response => {
-                    let itemList = response.data;
-                    if (itemList && itemList.length > 0) {
-                        this.item = itemList[r]
-                    } else {
-                        console.log("not found data");
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-            },
-
-            checkName() {
-                return this.item.receiverName === this.item.receiverName.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi, '');
-            },
-
-            _inputName: function () {
-                if (!this.checkName()) {
-                    this.namePrompt = "用户名只能为数字和字母的组合";
-                    this.item.receiverName = this.item.receiverName.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi, '');
-                } else {
-                    this.namePrompt = "";
-                }
-            },
-
-            _inputPhone: function () {
-                this.item.receiverPhone = this.item.receiverPhone.replace(/[^\d]/g, '');
-                this.phonePrompt = "";
-            },
-
-            _inputAddress: function () {
-                this.addressPrompt = "";
-            },
-
-            _cancel: function () {
-                window.location.href = "/myAddress";
-            },
-
-            _save: function () {
-                if (!this.item.receiverName) {
-                    this.namePrompt = "姓名不能为空";
-                } else if (!this.checkName()) {
-                    this.namePrompt = "用户名只能为数字和字母的组合";
-                } else if (this.item.receiverPhone.length !== 11) {
-                    this.phonePrompt = "请输入正确的手机号";
-                } else if (!this.item.receiverAddressInfo) {
-                    this.addressPrompt = "收货地址不能为空";
-                } else {
-                    axios.put('/receiver/updReceiver', this.item)
-                    .then(function (response) {
-                        console.log(response);
-                        window.location.href = '/myAddress';
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                        alert("输入信息格式不正确。");
-                    });
-                }
-            }
-        }
+      item: ''
     }
-</script>
+  },
 
+  mounted () {
+    this.getUserName = sessionStorage.getItem('getUserName')
+    this.getData()
+  },
+
+  methods: {
+    getData () {
+      let r = this.$route.query.id
+      axios.get('/receiver/list/userName=' + this.getUserName).then(response => {
+        let itemList = response.data
+        if (itemList && itemList.length > 0) {
+          this.item = itemList[r]
+        } else {
+          console.log('not found data')
+        }
+      })
+        .catch(function (error) {
+          console.log(error)
+        })
+    },
+
+    checkName () {
+      return this.item.receiverName === this.item.receiverName.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi, '')
+    },
+
+    _inputName: function () {
+      if (!this.checkName()) {
+        this.namePrompt = '用户名只能为数字和字母的组合'
+        this.item.receiverName = this.item.receiverName.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi, '')
+      } else {
+        this.namePrompt = ''
+      }
+    },
+
+    _inputPhone: function () {
+      this.item.receiverPhone = this.item.receiverPhone.replace(/[^\d]/g, '')
+      this.phonePrompt = ''
+    },
+
+    _inputAddress: function () {
+      this.addressPrompt = ''
+    },
+
+    _cancel: function () {
+      window.location.href = '/myAddress'
+    },
+
+    _save: function () {
+      if (!this.item.receiverName) {
+        this.namePrompt = '姓名不能为空'
+      } else if (!this.checkName()) {
+        this.namePrompt = '用户名只能为数字和字母的组合'
+      } else if (this.item.receiverPhone.length !== 11) {
+        this.phonePrompt = '请输入正确的手机号'
+      } else if (!this.item.receiverAddressInfo) {
+        this.addressPrompt = '收货地址不能为空'
+      } else {
+        axios.put('/receiver/updReceiver', this.item)
+          .then(function (response) {
+            console.log(response)
+            window.location.href = '/myAddress'
+          })
+          .catch(function (error) {
+            console.log(error)
+            alert('输入信息格式不正确。')
+          })
+      }
+    }
+  }
+}
+</script>
 
 <style lang="stylus" scoped>
     #editAddress
