@@ -4,15 +4,23 @@
       <div class="image">
         <img alt="logo" src="../assets/suancai.jpg" style="width:50px;height: 50px;" />
       </div>
+      <ul class="nav">
+        <li>
+          <a>我的京西</a>
+          <ul class="menu">
+            <li>
+              <a title="个人资料" href="/MyInfo">个人资料</a>
+            </li>
+            <li>
+              <a title="收货地址" href="/myAddress">收货地址</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
       <div class="link">
-        <ul class="linkin">
-          <li style="display:inline;">
-            <a href="/Login">登录</a>
-          </li>
-          <li style="display:inline;">
-            <a href="/Register">注册</a>
-          </li>
-        </ul>
+        <a href="/Login">登录</a>
+        <a href="/Register">注册</a>
       </div>
     </header>
     <main>
@@ -41,7 +49,7 @@ export default {
 };
 </script>
 
-<style lang="stylus">
+<style lang="stylus" >
 .header {
   align-items: center;
   display: flex;
@@ -52,6 +60,34 @@ export default {
   line-height: 1.5;
   padding: 9px;
   z-index: 32;
+  position: relative;
+
+  .link {
+    position: absolute;
+    right: 40px;
+
+    a:link, a:visited {
+      font-weight: bold;
+      color: #FFFFFF;
+      text-align: center;
+      padding: 6px;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    a:hover, a:active {
+      background-color: #5E5E5E;
+    }
+  }
+}
+
+.nav {
+  list-style: none;
+
+  .menu {
+    padding: 0;
+    list-style: none;
+  }
 }
 
 .image {
@@ -59,31 +95,5 @@ export default {
   left: 15px;
   width: 50px;
   height: 50px;
-}
-
-.link {
-  position: fixed;
-  right: 40px;
-}
-
-.linkin {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-
-a:link, a:visited {
-  font-weight: bold;
-  color: #FFFFFF;
-  text-align: center;
-  padding: 6px;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-a:hover, a:active {
-  background-color: #5E5E5E;
 }
 </style>

@@ -129,7 +129,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="stylus">
+<style lang="stylus" >
   #Login
       font-family 'Avenir', Helvetica, Arial, sans-serif
       -webkit-font-smoothing antialiased
