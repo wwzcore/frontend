@@ -4,19 +4,17 @@
       <div class="image">
         <img alt="logo" src="../assets/suancai.jpg" style="width:50px;height: 50px;" />
       </div>
-      <ul class="nav">
-        <li>
-          <a>我的京西</a>
-          <ul class="menu">
-            <li>
-              <a title="个人资料" href="/MyInfo">个人资料</a>
-            </li>
-            <li>
-              <a title="收货地址" href="/myAddress">收货地址</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
+      <div class="nav">
+        <a>我的京西</a>
+        <div class="menu">
+          <li>
+            <a href="/MyInfo">个人资料</a>
+          </li>
+          <li>
+            <a href="/myAddress">收货地址</a>
+          </li>
+        </div>
+      </div>
 
       <div class="link">
         <a href="/Login">登录</a>
@@ -34,19 +32,19 @@
 </template>
 
 <script>
-import Browsing from "@/components/Browsing.vue";
+import Browsing from '@/components/Browsing.vue'
 export default {
-  name: "Host",
+  name: 'Host',
   components: {
     Browsing
   },
 
-  data() {
+  data () {
     return {
-      getUserName: ""
-    };
+      getUserName: ''
+    }
   }
-};
+}
 </script>
 
 <style lang="stylus" >
@@ -61,6 +59,35 @@ export default {
   padding: 9px;
   z-index: 32;
   position: relative;
+
+  .nav {
+    font-weight: bold;
+    font-size: 20px;
+    position: relative;
+    left: 40px;
+    list-style: none;
+
+    a:hover, a:active {
+      background-color: #5E5E5E;
+    }
+
+    .menu {
+      padding: 0;
+      display: none;
+      position: absolute;
+      text-decoration: none;
+      text-transform: uppercase;
+
+      a:hover, a:active {
+        background-color: #5E5E5E;
+      }
+    }
+  }
+
+  .nav:hover .menu {
+    display: block;
+    background-color: #24292e;
+  }
 
   .link {
     position: absolute;
@@ -78,15 +105,6 @@ export default {
     a:hover, a:active {
       background-color: #5E5E5E;
     }
-  }
-}
-
-.nav {
-  list-style: none;
-
-  .menu {
-    padding: 0;
-    list-style: none;
   }
 }
 
