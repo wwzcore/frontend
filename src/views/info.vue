@@ -81,15 +81,15 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 export default {
-  name: "info",
-  data() {
+  name: 'info',
+  data () {
     return {
-      UserId: "1", // 从前端获得
+      UserId: '1', // 从前端获得
       user: {},
       readonly: true
-    };
+    }
   },
 
   // mounted () {
@@ -98,41 +98,41 @@ export default {
   // },
 
   methods: {
-    getData() {
+    getData () {
       axios
-        .get("/user/getUseOne/userName=" + this.getUserName)
+        .get('/user/getUseOne/userName=' + this.getUserName)
         .then(response => {
-          this.user = response.data;
+          this.user = response.data
         })
-        .catch(function(error) {
-          console.log(error);
-        });
+        .catch(function (error) {
+          console.log(error)
+        })
     },
 
-    modify() {
-      this.readonly = false;
+    modify () {
+      this.readonly = false
     },
-    submit() {
-      let emailLegal = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+    submit () {
+      let emailLegal = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
       // let a = emailLegal.test(this.user.UserEmail);
       if (!emailLegal.test(this.user.userEmail)) {
-        return alert("邮件地址不合规！");
+        return alert('邮件地址不合规！')
       }
       axios
-        .put("/user/updateUser/", this.user)
-        .then(function(response) {
-          window.sessionStorage.setItem("getUserName", response.data.userName);
-          alert("修改成功");
-          console.log(response);
-          window.location.reload();
+        .put('/user/updateUser/', this.user)
+        .then(function (response) {
+          window.sessionStorage.setItem('getUserName', response.data.userName)
+          alert('修改成功')
+          console.log(response)
+          window.location.reload()
         })
-        .catch(function(error) {
-          console.log(error);
-          alert("输入的信息有误！");
-        });
+        .catch(function (error) {
+          console.log(error)
+          alert('输入的信息有误！')
+        })
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

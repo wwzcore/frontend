@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  name: "browsing"
-};
+  name: 'browsing'
+}
 </script>
 
 <style lang="stylus">

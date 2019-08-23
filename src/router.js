@@ -35,7 +35,7 @@ export default new Router({
     },
     {
       path: '/login',
-      name: 'Login',
+      name: 'login',
       meta: { auth: true },
       component: () => import('./views/login.vue')
     },

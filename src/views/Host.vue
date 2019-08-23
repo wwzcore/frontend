@@ -30,14 +30,14 @@
 
 <script>
 export default {
-  name: "host",
+  name: 'host',
 
-  data() {
+  data () {
     return {
-      getUserName: ""
-    };
+      getUserName: ''
+    }
   }
-};
+}
 </script>
 
 <style lang="stylus" >
@@ -60,6 +60,7 @@ export default {
     img {
       width: 100%;
       height: 100%;
+      margin-left: 15px;
     }
   }
 
@@ -70,10 +71,6 @@ export default {
     left: 40px;
     list-style: none;
 
-    a:hover, a:active {
-      background-color: #5E5E5E;
-    }
-
     .menu {
       padding: 10px;
       display: none;
@@ -81,10 +78,6 @@ export default {
       text-decoration: none;
       text-transform: uppercase;
       white-space: nowrap;
-
-      a:hover, a:active {
-        background-color: #5E5E5E;
-      }
     }
 
     &:hover {
