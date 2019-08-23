@@ -32,8 +32,7 @@ pipeline{
                 """
                 echo 'hello world'
                 sh """
-                    ssh zxg1990@docker.for.mac.host.internal "cd /Users/zxg1990/src/demo/front-end-backend-demo/;sh servedown.sh"
-                    ssh zxg1990@docker.for.mac.host.internal "cd /Users/zxg1990/src/demo/front-end-backend-demo/frond-end/;rm -rf ."
+                    ssh zxg1990@docker.for.mac.host.internal "cd /Users/zxg1990/src/demo/front-end-backend-demo/frond-end;mkdir temp;mv * temp;rm -rf temp"
                     scp $JENKINS_HOME/workspace/frontend/dist/dist.tar \
                         zxg1990@docker.for.mac.host.internal:/Users/zxg1990/src/demo/front-end-backend-demo/frond-end/
                 """
@@ -52,6 +51,7 @@ pipeline{
                 //ÏÈÍ£·þÎñ
                 sh """
                  ssh zxg1990@docker.for.mac.host.internal "cd /Users/zxg1990/src/demo/front-end-backend-demo/frond-end;tar -xvf dist.tar"
+                 ssh zxg1990@docker.for.mac.host.internal "cd /Users/zxg1990/src/demo/front-end-backend-demo/;sh servedown.sh"
                  ssh zxg1990@docker.for.mac.host.internal "cd /Users/zxg1990/src/demo/front-end-backend-demo/;sh serveup.sh"
                  """
             }
