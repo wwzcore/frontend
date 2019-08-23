@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Host from './views/Host.vue'
+import Host from './views/host.vue'
 
 Vue.use(Router)
 export default new Router({
@@ -37,12 +37,12 @@ export default new Router({
       path: '/login',
       name: 'login',
       meta: { auth: true },
-      component: () => import('./views/Login.vue')
+      component: () => import('./views/login.vue')
     },
     {
       path: '/register',
       name: 'register',
-      component: () => import('./views/Register.vue')
+      component: () => import('./views/register.vue')
     },
 
     {
