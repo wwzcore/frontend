@@ -46,7 +46,7 @@ import axios from 'axios'
 
 export default {
 
-  name: 'newAdd',
+  name: 'new',
 
   data () {
     return {

@@ -1,11 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Host from './views/Host.vue'
-
-import Login from './views/Login.vue'
-import Register from './views/Register.vue'
-import NewAdd from './views/address/newAdd.vue'
-import EditAddress from './views/address/editAddress.vue'
+import Host from './views/host.vue'
 
 Vue.use(Router)
 export default new Router({
@@ -14,47 +9,53 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Host',
+      name: 'host',
       meta: { auth: true },
       component: Host,
       children: [{
-        path: '/myInfo',
-        name: 'myInfo',
+        path: '/',
+        name: 'browsing',
+        meta: { auth: true },
+        component: () => import('./views/browsing.vue')
+      }, {
+        path: '/info',
+        name: 'info',
         meta: { auth: true },
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "address" */ './views/MyInfo.vue')
+        component: () => import('./views/info.vue')
+      },
+      {
+        path: '/address',
+        name: 'address',
+        meta: { auth: true },
+        component: () => import('./views/address/address.vue')
       }]
     },
     {
       path: '/login',
       name: 'Login',
       meta: { auth: true },
-      component: Login
+      component: () => import('./views/login.vue')
     },
     {
       path: '/register',
-      name: 'Register',
-      component: Register
+      name: 'register',
+      component: () => import('./views/register.vue')
+    },
+
+    {
+      path: '/address/new',
+      name: 'New',
+      meta: { auth: true },
+      component: () => import('./views/address/new.vue')
     },
     {
-      path: '/myAddress',
-      name: 'MyaAddress',
+      path: '/address/edit',
+      name: 'edit',
       meta: { auth: true },
-      component: () => import(/* webpackChunkName: "address" */ './views/address/myAddress.vue')
-    },
-    {
-      path: '/address/newAdd',
-      name: 'NewAdd',
-      meta: { auth: true },
-      component: NewAdd
-    },
-    {
-      path: '/address/editAddress',
-      name: 'EditAddress',
-      meta: { auth: true },
-      component: EditAddress
+      component: () => import('./views/address/edit.vue')
     }
   ]
 })

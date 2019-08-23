@@ -44,7 +44,7 @@ import axios from 'axios'
 
 export default {
 
-  name: 'editAddress',
+  name: 'edit',
 
   data () {
     return {

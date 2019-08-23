@@ -5,40 +5,32 @@
         <img alt="logo" src="../assets/suancai.jpg" />
       </div>
       <div class="nav">
-        <a>我的京西</a>
+        <router-link :to="{name: 'browsing'}">我的京西</router-link>
         <div class="menu">
           <li>
-            <router-link :to="{name: 'myInfo'}">个人资料</router-link>
+            <router-link :to="{name: 'info'}">个人资料</router-link>
           </li>
           <li>
-            <a href="/myAddress">收货地址</a>
+            <router-link :to="{name: 'address'}">收货地址</router-link>
           </li>
         </div>
       </div>
 
       <div class="link">
-        <a href="/Login">登录</a>
-        <a href="/Register">注册</a>
+        <a href="/login">登录</a>
+        <a href="/register">注册</a>
       </div>
     </header>
     <main>
-      <p>show</p>
-      <Browsing />
-      <router-view/>
+      <router-view />
     </main>
-    <footer>
-      <p>Here's some contact info</p>
-    </footer>
+    <footer></footer>
   </div>
 </template>
 
 <script>
-import Browsing from "@/components/Browsing.vue";
 export default {
-  name: "Host",
-  components: {
-    Browsing
-  },
+  name: "host",
 
   data() {
     return {
@@ -64,11 +56,13 @@ export default {
   .avatar {
     width: 50px;
     height: 50px;
+
     img {
       width: 100%;
       height: 100%;
     }
   }
+
   .nav {
     font-weight: bold;
     font-size: 20px;
@@ -87,7 +81,7 @@ export default {
       text-decoration: none;
       text-transform: uppercase;
       white-space: nowrap;
-      
+
       a:hover, a:active {
         background-color: #5E5E5E;
       }

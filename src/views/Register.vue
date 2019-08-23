@@ -1,5 +1,5 @@
 <template>
-  <div id="Register">
+  <div id="register">
     <h1>用户注册</h1>
      <br/>
     <table class="registerTable">
@@ -101,7 +101,7 @@ import axios from 'axios'
 
 export default {
 
-  name: 'Register',
+  name: 'register',
 
   data () {
     return {
@@ -298,7 +298,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" scoped>
-  #Register
+  #register
      float center
      position absolute
      width:1000px
