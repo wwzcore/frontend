@@ -1,14 +1,14 @@
 <template>
   <div class="container">
     <header class="header">
-      <div class="image">
-        <img alt="logo" src="../assets/suancai.jpg" style="width:50px;height: 50px;" />
+      <div class="avatar">
+        <img alt="logo" src="../assets/suancai.jpg" />
       </div>
       <div class="nav">
         <a>我的京西</a>
         <div class="menu">
           <li>
-            <a href="/MyInfo">个人资料</a>
+            <router-link :to="{name: 'myInfo'}">个人资料</router-link>
           </li>
           <li>
             <a href="/myAddress">收货地址</a>
@@ -24,6 +24,7 @@
     <main>
       <p>show</p>
       <Browsing />
+      <router-view/>
     </main>
     <footer>
       <p>Here's some contact info</p>
@@ -32,19 +33,19 @@
 </template>
 
 <script>
-import Browsing from '@/components/Browsing.vue'
+import Browsing from "@/components/Browsing.vue";
 export default {
-  name: 'Host',
+  name: "Host",
   components: {
     Browsing
   },
 
-  data () {
+  data() {
     return {
-      getUserName: ''
-    }
+      getUserName: ""
+    };
   }
-}
+};
 </script>
 
 <style lang="stylus" >
@@ -60,6 +61,14 @@ export default {
   z-index: 32;
   position: relative;
 
+  .avatar {
+    width: 50px;
+    height: 50px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
   .nav {
     font-weight: bold;
     font-size: 20px;
@@ -72,21 +81,24 @@ export default {
     }
 
     .menu {
-      padding: 0;
+      padding: 10px;
       display: none;
       position: absolute;
       text-decoration: none;
       text-transform: uppercase;
-
+      white-space: nowrap;
+      
       a:hover, a:active {
         background-color: #5E5E5E;
       }
     }
-  }
 
-  .nav:hover .menu {
-    display: block;
-    background-color: #24292e;
+    &:hover {
+      .menu {
+        display: block;
+        background-color: #24292e;
+      }
+    }
   }
 
   .link {

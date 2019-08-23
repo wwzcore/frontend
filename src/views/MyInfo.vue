@@ -75,7 +75,6 @@
       </tr>
     </table>
     <br/>
-    <button v-on:click="cancel()" v-show="!readonly">取消</button>
     <button v-on:click="modify()" v-show="readonly">编辑</button> |
     <button v-on:click="submit()">提交</button>
   </div>
@@ -93,10 +92,10 @@ export default {
     }
   },
 
-  mounted () {
-    this.getUserName = sessionStorage.getItem('getUserName')
-    this.getData()
-  },
+  // mounted () {
+  //   this.getUserName = sessionStorage.getItem('getUserName')
+  //   this.getData()
+  // },
 
   methods: {
     getData () {
@@ -108,10 +107,6 @@ export default {
         .catch(function (error) {
           console.log(error)
         })
-    },
-
-    cancel () {
-      this.readonly = true
     },
 
     modify () {
