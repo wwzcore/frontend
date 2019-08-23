@@ -32,8 +32,11 @@ pipeline{
                 sh """
                     cd  $JENKINS_HOME/workspace/frontend/dist
                     tar -cvf dist.tar .
+                """
+                echo 'hello world'
+                sh """
                     ssh zxg1990@docker.for.mac.host.internal "cd /Users/zxg1990/src/demo/front-end-backend-demo/frond-end/;rm -rf *"
-                    scp $JENKINS_HOME/workspace/frontend/dist.tar \
+                    scp $JENKINS_HOME/workspace/frontend/dist/dist.tar \
                         zxg1990@docker.for.mac.host.internal:/Users/zxg1990/src/demo/front-end-backend-demo/frond-end/
                 """
                 //保留产出物
