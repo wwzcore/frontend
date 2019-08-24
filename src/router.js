@@ -43,6 +43,7 @@ export default new Router({
     {
       path: '/register',
       name: 'register',
+      meta: { auth: false },
       component: () => import('./views/register.vue')
     },
 
