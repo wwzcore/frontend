@@ -3,7 +3,7 @@
     <header class="header">
       <div class="headleft">
         <div class="avatar">
-          <img alt="logo" src="../assets/suancai.jpg" />
+          <img alt="logo" :src="require('../assets/'+userico+'.jpg')" />
         </div>
         <div v-bind:class="[getUserName?'nav':'nav_h']">
         <router-link :to="{name: 'browsing'}">我的京西</router-link>
@@ -41,10 +41,13 @@ export default {
   data () {
     return {
       getUserName: '',
+      userico:'header'
     }
   },
   mounted: function () {
     this.getUserName = sessionStorage.getItem("getUserName");
+      alert(this.getUserName)
+      userico = this.getUserName
 
   },
   methods: {
