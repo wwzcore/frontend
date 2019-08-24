@@ -4,7 +4,7 @@
       <div class="avatar">
         <img alt="logo" src="../assets/suancai.jpg" />
       </div>
-      <div class="nav">
+      <div v-bind:class="navObject">
         <router-link :to="{name: 'browsing'}">我的京西</router-link>
         <div class="menu">
           <li>
@@ -30,14 +30,15 @@
 
 <script>
 export default {
-  name: 'host',
+  name: "host",
 
-  data () {
+  data() {
     return {
-      getUserName: ''
-    }
+      navObject: { navLogin: false, navUnlogin: true },
+      getUserName: ""
+    };
   }
-}
+};
 </script>
 
 <style lang="stylus" >
@@ -64,7 +65,19 @@ export default {
     }
   }
 
-  .nav {
+  .navUnlogin {
+    font-weight: bold;
+    font-size: 20px;
+    position: relative;
+    left: 40px;
+    list-style: none;
+
+    .menu {
+      display: none;
+    }
+  }
+
+  .navLogin {
     font-weight: bold;
     font-size: 20px;
     position: relative;

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Host from './views/Host.vue'
+import router from './router'
+import Host from './views/host.vue'
 
 Vue.use(Router)
 export default new Router({
@@ -10,12 +11,12 @@ export default new Router({
     {
       path: '/',
       name: 'host',
-      meta: { auth: true },
+      meta: { auth: false },
       component: Host,
       children: [{
         path: '/',
         name: 'browsing',
-        meta: { auth: true },
+        meta: { auth: false },
         component: () => import('./views/browsing.vue')
       }, {
         path: '/info',
@@ -36,13 +37,13 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      meta: { auth: true },
-      component: () => import('./views/Login.vue')
+      meta: { auth: false },
+      component: () => import('./views/login.vue')
     },
     {
       path: '/register',
       name: 'register',
-      component: () => import('./views/Register.vue')
+      component: () => import('./views/register.vue')
     },
 
     {
@@ -60,22 +61,16 @@ export default new Router({
   ]
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(m => m.meta.auth)) {
-//     // console.log("先判�?�?否登�?")�?
-//     if (to.name === 'Host') {
-//       next()
-//     } else {
-//       if (sessionStorage.getItem('getUserName')) {
-//         // 访问服务器缓存数�?，判�?当前data�?否失�?
-//         next()
-//       } else {
-//         alert('您的登陆已过期，请重新登陆�?')
-//         next('/')
-//       }
-//     }
-//   } else {
-//     console.log('请先登陆')
-//     next()
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(m => m.meta.auth)) {
+    if (sessionStorage.getItem('getUserName')) {
+      next()
+    } else {
+      alert('您的登陆已过期，请重新登陆!')
+      next('/')
+    }
+  } else {
+    console.log('请先登陆')
+    next()
+  }
+})
