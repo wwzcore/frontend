@@ -30,15 +30,15 @@
 
 <script>
 export default {
-  name: 'host',
+  name: "host",
 
-  data () {
+  data() {
     return {
       navObject: { navLogin: false, navUnlogin: true },
-      getUserName: ''
-    }
+      getUserName: ""
+    };
   }
-}
+};
 </script>
 
 <style lang="stylus" >

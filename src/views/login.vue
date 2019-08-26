@@ -112,7 +112,7 @@ export default {
                 // 把拿到的返回结果放在sessionStorage中
                 window.sessionStorage.setItem('getUserName', this.user_name)
                 // 得到用户名userName并存储在sessionStorage中
-                window.location.href = '/MyJX'
+                window.location.href = '/'
                 break
               default:
                 alert('请求异常')
