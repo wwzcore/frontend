@@ -46,9 +46,7 @@ export default {
   },
   mounted: function () {
     this.getUserName = sessionStorage.getItem("getUserName");
-      alert(this.getUserName)
-      userico = this.getUserName
-
+      this.userico = this.getUserName
   },
   methods: {
     _out:function() {

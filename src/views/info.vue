@@ -92,10 +92,10 @@ export default {
     }
   },
 
-  // mounted () {
-  //   this.getUserName = sessionStorage.getItem('getUserName')
-  //   this.getData()
-  // },
+  mounted () {
+    this.getUserName = sessionStorage.getItem('getUserName')
+    this.getData()
+  },
 
   methods: {
     getData () {
