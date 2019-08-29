@@ -1,15 +1,15 @@
 //Jenkinsfile (Declarative Pipeline)
 pipeline{
     agent {label "frontend"}
-    //ÉèÖÃ»·¾³±äÁ¿
+    //è®¾ç½®ç¯å¢ƒå˜é‡
     environment { 
         JENKINS_HOME = '/home/frontend'
     }
     stages {
         stage('Build') {
             steps{
-                //Èç¹ûÓĞ¶àĞĞµÄÃüÁî£¬Ôò±ØĞëÒª¼ÓÈı¸öÒıºÅ
-                //Èç¹ûÖ»ÓĞÒ»ĞĞÃüÁî£¬Ôò¿ÉÒÔÊÇÒ»¸öÒıºÅ
+                //å¦‚æœæœ‰å¤šè¡Œçš„å‘½ä»¤ï¼Œåˆ™å¿…é¡»è¦åŠ ä¸‰ä¸ªå¼•å·
+                //å¦‚æœåªæœ‰ä¸€è¡Œå‘½ä»¤ï¼Œåˆ™å¯ä»¥æ˜¯ä¸€ä¸ªå¼•å·
                 sh """ 
                     yarn install
                     yarn build
@@ -25,7 +25,7 @@ pipeline{
         stage('Deploy') {
             steps{
                 echo 'This is a deploy step'
-                //½«²ú³öÎïÈÓµ½Íâ±ßÈ¥
+                //å°†äº§å‡ºç‰©æ‰”åˆ°å¤–è¾¹å»
                 sh """
                     cd  $JENKINS_HOME/workspace/frontend/dist
                     tar -cvf dist.tar .
@@ -36,9 +36,9 @@ pipeline{
                     scp $JENKINS_HOME/workspace/frontend/dist/dist.tar \
                         zxg1990@docker.for.mac.host.internal:/Users/zxg1990/src/demo/front-end-backend-demo/front-end/
                 """
-                //±£Áô²ú³öÎï
+                //ä¿ç•™äº§å‡ºç‰©
                 archiveArtifacts artifacts: '*/*.tar', fingerprint: true
-                //Çå¿Õ¹¤×÷Çø
+                //æ¸…ç©ºå·¥ä½œåŒº
                 cleanWs()
 
                
@@ -47,8 +47,8 @@ pipeline{
         stage('Restart') {
             steps {
                 echo "This is restart serve"
-                 //ÖØÆô·şÎñ
-                //ÏÈÍ£·şÎñ
+                 //é‡å¯æœåŠ¡
+                //å…ˆåœæœåŠ¡
                  //
                  //
                 sh """
