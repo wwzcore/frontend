@@ -7,14 +7,14 @@
         </div>
         <div v-bind:class="[getUserName?'nav':'nav_h']">
           <router-link :to="{name: 'browsing'}">我的京西</router-link>
-          <div class="menu">
+          <ul class="menu">
             <li>
               <router-link :to="{name: 'info'}">个人资料</router-link>
             </li>
             <li>
               <router-link :to="{name: 'address'}">收货地址</router-link>
             </li>
-          </div>
+          </ul>
         </div>
       </div>
       <div class="link" v-show="!getUserName">
@@ -34,38 +34,38 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 export default {
-  name: "host",
+  name: 'host',
 
-  data() {
+  data () {
     return {
-      userico: "header"
-    };
+      userico: 'header'
+    }
   },
-  mounted: function() {
-    this.getUserName = sessionStorage.getItem("getUserName");
-    this.userico = this.getUserName;
+  created: function () {
+    this.getUserName = sessionStorage.getItem('getUserName')
+    this.userico = this.getUserName
   },
   methods: {
-    out: function() {
+    out: function () {
       axios
-        .post("/userInfo/loginout/", {
+        .post('/userInfo/loginout/', {
           userName: this.getUserName
         })
         .then(response => {
-          window.sessionStorage.clear();
-          console.log("退出登录，清空sessionStorage");
-          alert(response.data.message);
-          window.location.href = "/";
+          window.sessionStorage.clear()
+          console.log('退出登录，清空sessionStorage')
+          alert(response.data.message)
+          window.location.href = '/'
         })
-        .catch(function(error) {
-          console.log(error);
-          alert("系统出错/userInfo/loginout");
-        });
+        .catch(function (error) {
+          console.log(error)
+          alert('系统出错/userInfo/loginout')
+        })
     }
   }
-};
+}
 </script>
 
 <style lang="stylus" >

@@ -163,175 +163,175 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios'
 
 export default {
-  name: "register",
+  name: 'register',
 
-  data() {
+  data () {
     return {
-      user_name: "",
-      user_password: "",
-      confirm_password: "",
-      user_phone: "",
-      user_email: "",
-      act_name: "",
-      user_sex: "",
-      mall_name: "",
-      user_address: "",
+      user_name: '',
+      user_password: '',
+      confirm_password: '',
+      user_phone: '',
+      user_email: '',
+      act_name: '',
+      user_sex: '',
+      mall_name: '',
+      user_address: '',
 
-      usernamePrompt: "",
-      passwordPrompt: "",
-      checkpasswordPrompt: "",
-      phonePrompt: "",
-      emailPrompt: "",
-      actnamePrompt: "",
-      mallnamePrompt: ""
-    };
+      usernamePrompt: '',
+      passwordPrompt: '',
+      checkpasswordPrompt: '',
+      phonePrompt: '',
+      emailPrompt: '',
+      actnamePrompt: '',
+      mallnamePrompt: ''
+    }
   },
 
   methods: {
-    checkUserName() {
-      return this.user_name === this.user_name.replace(/[^\d\a-zA-Z]/gi, "");
+    checkUserName () {
+      return this.user_name === this.user_name.replace(/[^\d\a-zA-Z]/gi, '')
     },
 
-    checkPassword() {
-      let regPassword = /^[a-zA-Z0-9]{6,12}$/;
-      return regPassword.test(this.user_password);
+    checkPassword () {
+      let regPassword = /^[a-zA-Z0-9]{6,12}$/
+      return regPassword.test(this.user_password)
     },
 
-    checkConfirmPassword() {
-      return this.confirm_password === this.user_password;
+    checkConfirmPassword () {
+      return this.confirm_password === this.user_password
     },
 
-    checkUserEmail() {
-      let regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-      return regEmail.test(this.user_email);
+    checkUserEmail () {
+      let regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+      return regEmail.test(this.user_email)
     },
 
-    checkActName() {
+    checkActName () {
       return (
-        this.act_name === this.act_name.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi, "")
-      );
+        this.act_name === this.act_name.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi, '')
+      )
     },
 
-    checkMallName() {
+    checkMallName () {
       return (
         this.mall_name ===
-        this.mall_name.replace(/[^\u4E00-\u9FA5\a-zA-Z0-9]/gi, "")
-      );
+        this.mall_name.replace(/[^\u4E00-\u9FA5\a-zA-Z0-9]/gi, '')
+      )
     },
 
-    inputUserName: function() {
+    inputUserName: function () {
       if (!this.checkUserName()) {
-        this.usernamePrompt = "用户名只能为数字和字母的组合";
-        this.user_name = this.user_name.replace(/[^\d\a-zA-Z]/gi, "");
+        this.usernamePrompt = '用户名只能为数字和字母的组合'
+        this.user_name = this.user_name.replace(/[^\d\a-zA-Z]/gi, '')
       } else {
-        this.usernamePrompt = "";
+        this.usernamePrompt = ''
       }
     },
 
-    _inputPassword: function() {
+    _inputPassword: function () {
       if (!this.checkPassword()) {
-        this.passwordPrompt = "用户名只能为数字和字母的组合";
+        this.passwordPrompt = '用户名只能为数字和字母的组合'
         // this.user_password = this.user_password.replace(/[^\d\a-zA-Z]/gi,'');
       } else {
-        this.passwordPrompt = "";
+        this.passwordPrompt = ''
       }
     },
 
-    _inputConfirmPassword: function() {
+    _inputConfirmPassword: function () {
       if (!this.checkConfirmPassword()) {
-        this.checkpasswordPrompt = "密码输入不一致";
+        this.checkpasswordPrompt = '密码输入不一致'
       } else {
-        this.checkpasswordPrompt = "";
+        this.checkpasswordPrompt = ''
       }
     },
 
-    _inputPhone: function() {
-      this.phonePrompt = "";
+    _inputPhone: function () {
+      this.phonePrompt = ''
     },
 
-    _inputEmail: function() {
-      this.emailPrompt = "";
+    _inputEmail: function () {
+      this.emailPrompt = ''
     },
 
-    _inputActName: function() {
+    _inputActName: function () {
       if (!this.checkActName()) {
-        this.actnamePrompt = "用户名只能为汉字和字母的组合";
-        this.act_name = this.act_name.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi, "");
+        this.actnamePrompt = '用户名只能为汉字和字母的组合'
+        this.act_name = this.act_name.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi, '')
       } else {
-        this.actnamePrompt = "";
+        this.actnamePrompt = ''
       }
     },
 
-    _inputMallName: function() {
+    _inputMallName: function () {
       if (!this.checkMallName()) {
-        this.mallnamePrompt = "用户昵称只能由汉字、数字和字母的组成";
+        this.mallnamePrompt = '用户昵称只能由汉字、数字和字母的组成'
         this.mall_name = this.mall_name.replace(
           /[^\u4E00-\u9FA5\a-zA-Z0-9]/gi,
-          ""
-        );
+          ''
+        )
       } else {
-        this.mallnamePrompt = "";
+        this.mallnamePrompt = ''
       }
     },
 
-    clearAllPrompt: function() {
-      this.usernamePrompt = "";
-      this.passwordPrompt = "";
-      this.checkpasswordPrompt = "";
-      this.phonePrompt = "";
-      this.emailPrompt = "";
-      this.actnamePrompt = "";
-      this.mallnamePrompt = "";
+    clearAllPrompt: function () {
+      this.usernamePrompt = ''
+      this.passwordPrompt = ''
+      this.checkpasswordPrompt = ''
+      this.phonePrompt = ''
+      this.emailPrompt = ''
+      this.actnamePrompt = ''
+      this.mallnamePrompt = ''
     },
 
-    addPassword() {
+    addPassword () {
       axios
-        .post("/userInfo/addUser/", {
-          userId: "", // 在后端从user表中得到userId
+        .post('/userInfo/addUser/', {
+          userId: '', // 在后端从user表中得到userId
           userName: this.user_name,
           userPassword: this.user_password
         })
-        .then(function(response) {
-          console.log(response);
-          window.location.href = "/"; // 新用户注册成功后在此处返回登录页面
+        .then(function (response) {
+          console.log(response)
+          window.location.href = '/' // 新用户注册成功后在此处返回登录页面
         })
-        .catch(function(error) {
-          console.log(error);
-          alert("输入信息格式不正确。");
-        });
+        .catch(function (error) {
+          console.log(error)
+          alert('输入信息格式不正确。')
+        })
     },
 
-    _register: function() {
+    _register: function () {
       if (!this.user_name) {
-        this.usernamePrompt = "用户名不能为空";
+        this.usernamePrompt = '用户名不能为空'
       } else if (!this.checkUserName()) {
-        this.usernamePrompt = "用户名只能为数字或字母的组合";
+        this.usernamePrompt = '用户名只能为数字或字母的组合'
       } else if (!this.user_password) {
-        this.passwordPrompt = "密码不能为空";
+        this.passwordPrompt = '密码不能为空'
       } else if (!this.checkPassword()) {
-        this.passwordPrompt = "密码只能为数字和字母的组合";
+        this.passwordPrompt = '密码只能为数字和字母的组合'
       } else if (!this.checkConfirmPassword()) {
-        this.checkpasswordPrompt = "密码输入不一致";
+        this.checkpasswordPrompt = '密码输入不一致'
       } else if (!this.user_phone) {
-        this.phonePrompt = "手机号不能为空";
+        this.phonePrompt = '手机号不能为空'
       } else if (this.user_phone.length !== 11) {
-        this.phonePrompt = "请输入正确的手机号";
+        this.phonePrompt = '请输入正确的手机号'
       } else if (!this.user_email) {
-        this.emailPrompt = "邮箱不能为空";
+        this.emailPrompt = '邮箱不能为空'
       } else if (!this.checkUserEmail()) {
-        this.emailPrompt = "请输入正确的邮箱";
+        this.emailPrompt = '请输入正确的邮箱'
       } else if (!this.act_name && !this.checkActName()) {
-        this.actnamePrompt = "姓名只由汉字和字母的组成";
+        this.actnamePrompt = '姓名只由汉字和字母的组成'
       } else if (!this.mall_name && !this.checkMallName()) {
-        this.mallnamePrompt = "用户昵称只能由汉字、数字和字母的组成";
+        this.mallnamePrompt = '用户昵称只能由汉字、数字和字母的组成'
       } else {
-        this.clearAllPrompt();
+        this.clearAllPrompt()
         axios
-          .post("/user/addUser/", {
-            userId: "",
+          .post('/user/addUser/', {
+            userId: '',
             userName: this.user_name,
             userPhone: this.user_phone,
             userRealName: this.act_name,
@@ -342,32 +342,32 @@ export default {
           })
           .then(response => {
             switch (response.data) {
-              case "userName false":
-                this.usernamePrompt = "用户名不能重复";
-                break;
-              case "userPhone false":
-                this.phonePrompt = "手机号不能重复";
-                break;
-              case "userMallName false":
-                this.emailPrompt = "邮箱不能重复";
-                break;
-              case "Success":
-                alert("新用户注册成功！");
-                this.addPassword();
-                break;
+              case 'userName false':
+                this.usernamePrompt = '用户名不能重复'
+                break
+              case 'userPhone false':
+                this.phonePrompt = '手机号不能重复'
+                break
+              case 'userMallName false':
+                this.emailPrompt = '邮箱不能重复'
+                break
+              case 'Success':
+                alert('新用户注册成功！')
+                this.addPassword()
+                break
               default:
-                alert("请求异常");
+                alert('请求异常')
             }
-            console.log(response);
+            console.log(response)
           })
-          .catch(function(error) {
-            console.log(error);
-            alert("输入信息格式不正确。");
-          });
+          .catch(function (error) {
+            console.log(error)
+            alert('输入信息格式不正确。')
+          })
       }
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
