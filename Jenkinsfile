@@ -4,6 +4,7 @@ pipeline{
     //设置环境变量
     environment { 
         JENKINS_HOME = '/home/frontend'
+        LANG='C.UTF-8'
     }
     stages {
         stage('Build') {
