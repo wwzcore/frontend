@@ -44,12 +44,12 @@ export default {
       userico: "header"
     };
   },
-  mounted: function() {
+  created () {
     this.userName = sessionStorage.getItem("nameInSession");
     this.userico = this.userName;
   },
   methods: {
-    out: function() {
+    out () {
       axios
         .post("/userInfo/loginout/", {
           userName: this.userName
