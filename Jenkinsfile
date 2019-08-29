@@ -3,7 +3,7 @@ pipeline{
     agent {label "frontend"}
     //设置环境变量
     environment { 
-        JENKINS_HOME = '/home'
+        JENKINS_HOME = '/home/frontend'
     }
     stages {
         stage('Build') {
@@ -32,9 +32,9 @@ pipeline{
                 """
                 echo 'hello world'
                 sh """
-                    ssh zxg1990@docker.for.mac.host.internal "cd /Users/zxg1990/src/demo/front-end-backend-demo/frond-end;mkdir temp;mv * temp;rm -rf temp"
+                    ssh zxg1990@docker.for.mac.host.internal "cd /Users/zxg1990/src/demo/front-end-backend-demo/front-end;mkdir temp;mv * temp"
                     scp $JENKINS_HOME/workspace/frontend/dist/dist.tar \
-                        zxg1990@docker.for.mac.host.internal:/Users/zxg1990/src/demo/front-end-backend-demo/frond-end/
+                        zxg1990@docker.for.mac.host.internal:/Users/zxg1990/src/demo/front-end-backend-demo/front-end/
                 """
                 //保留产出物
                 archiveArtifacts artifacts: '*/*.tar', fingerprint: true
@@ -49,10 +49,10 @@ pipeline{
                 echo "This is restart serve"
                  //重启服务
                 //先停服务
+                 //ssh zxg1990@docker.for.mac.host.internal "cd /Users/zxg1990/src/demo/front-end-backend-demo/;sh servedown.sh"
+                 //ssh zxg1990@docker.for.mac.host.internal "cd /Users/zxg1990/src/demo/front-end-backend-demo/;sh serveup.sh"
                 sh """
-                 ssh zxg1990@docker.for.mac.host.internal "cd /Users/zxg1990/src/demo/front-end-backend-demo/frond-end;tar -xvf dist.tar"
-                 ssh zxg1990@docker.for.mac.host.internal "cd /Users/zxg1990/src/demo/front-end-backend-demo/;sh servedown.sh"
-                 ssh zxg1990@docker.for.mac.host.internal "cd /Users/zxg1990/src/demo/front-end-backend-demo/;sh serveup.sh"
+                 ssh zxg1990@docker.for.mac.host.internal "cd /Users/zxg1990/src/demo/front-end-backend-demo/front-end;tar -xvf dist.tar"
                  """
             }
 
