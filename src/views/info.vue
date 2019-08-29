@@ -73,8 +73,20 @@
           </select>
         </td>
       </tr>
+      <td>头像:</td>
+      <td>
+        <img
+          :src="user.imgUrl" width="25px" height="25px"
+        />
+      </td>
     </table>
     <br />
+    <div class="img">
+      <input type="file" accept=".png, .jpg, .jpeg"  @change='onChange' v-bind:disabled="readonly">
+      <button @click="upload" v-bind:disabled="readonly">上传</button>
+      <p>{{imgUrl}}</p>
+      <img :src="imgUrl" width="25px" height="25px">
+    </div>
     <button v-on:click="modify()" v-show="readonly">编辑</button> |
     <button v-on:click="submit()">提交</button>
   </div>
@@ -86,18 +98,41 @@ export default {
   name: 'info',
   data () {
     return {
-      UserId: '1', // 从前端获得
       user: {},
-      readonly: true
+      readonly: true,
+      imgUrl: null,
+      file: null
     }
   },
 
-  // mounted () {
-  //   this.getUserName = sessionStorage.getItem('getUserName')
-  //   this.getData()
-  // },
+  mounted () {
+    this.getUserName = sessionStorage.getItem('nameInSession')
+    this.getData()
+  },
 
   methods: {
+    onChange(event) {
+      const inputElement = event.target
+      // 判断是否符合上传条件
+      if (inputElement.files.length === 0) return false
+      const file = inputElement.files[0]
+      /*
+              this.imgUrl = URL.createObjectURL(file)
+      */
+      this.file = file
+    },
+    upload() {
+      let formFile = new FormData()
+      formFile.append('uploadImage', this.file)
+
+      axios.post('/user/upload', formFile)
+        .then((res) => {
+          this.imgUrl = res.data
+          console.log('success!')
+        }).catch((err) => {
+        console.log(err);
+      })
+    },
     getData () {
       axios
         .get('/user/getUseOne/userName=' + this.getUserName)
@@ -118,10 +153,13 @@ export default {
       if (!emailLegal.test(this.user.userEmail)) {
         return alert('邮件地址不合规！')
       }
+
+      this.user.imgUrl=this.imgUrl
+
       axios
         .put('/user/updateUser/', this.user)
         .then(function (response) {
-          window.sessionStorage.setItem('getUserName', response.data.userName)
+          window.sessionStorage.setItem('nameInSession', response.data.userName)
           alert('修改成功')
           console.log(response)
           window.location.reload()

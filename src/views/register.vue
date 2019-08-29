@@ -1,106 +1,171 @@
 <template>
   <div id="register">
     <h1>用户注册</h1>
-     <br/>
+    <br />
     <table class="registerTable">
-
       <tr>
-        <td><label>用户名：</label></td>
+        <td>
+          <label>用户名：</label>
+        </td>
         <td class="registerShow">
-          <label><input type="text" maxlength="30" v-model="user_name" @input="_inputUserName" @click="_inputUserName"/></label>
+          <label>
+            <input
+              type="text"
+              maxlength="30"
+              v-model="user_name"
+              @input="inputUserName"
+              @click="inputUserName"
+            />
+          </label>
           <span style="color:red">*</span>
         </td>
-          <td class="promptText">{{usernamePrompt}}</td>
-      </tr>
-
-        <tr>
-        <td><label>密码：</label></td>
-        <td class="registerShow">
-          <label><input type="text" maxlength="12" v-model="user_password" @input="_inputPassword" @click="_inputPassword"/></label>
-          <span style="color:red">*</span>
-        </td>
-         <td class="promptText">{{passwordPrompt}}</td>
-      </tr>
-
-        <tr>
-            <td><label>确认密码：</label></td>
-            <td class="registerShow">
-                <label><input type="text" maxlength="12" v-model="confirm_password" @input="_inputConfirmPassword" @click="_inputConfirmPassword"/></label>
-                <span style="color:red">*</span>
-            </td>
-            <td class="promptText">{{checkpasswordPrompt}}</td>
-        </tr>
-
-        <tr>
-            <td><label>联系电话：</label></td>
-            <td class="registerShow">
-                <label><input type="tel" onkeyup="value=value.replace(/[^\d]/g,'')" v-model="user_phone" @click="_inputPhone"/></label>
-                <span style="color:red">*</span>
-            </td>
-            <td class="promptText">{{phonePrompt}}</td>
-        </tr>
-
-      <tr>
-        <td><label>邮箱：</label></td>
-        <td class="registerShow">
-          <label><input type="text" maxlength="50" v-model="user_email" @click="_inputEmail"/></label>
-          <span style="color:red">*</span>
-        </td>
-          <td class="promptText">{{emailPrompt}}</td>
+        <td class="promptText">{{usernamePrompt}}</td>
       </tr>
 
       <tr>
-          <td><label>姓名：</label></td>
-          <td class="registerShow">
-            <label><input type="text" v-model="act_name" maxlength="50" @input="_inputActName" @click="_inputActName"/></label>
-          </td>
-          <td class="promptText">{{actnamePrompt}}</td>
+        <td>
+          <label>密码：</label>
+        </td>
+        <td class="registerShow">
+          <label>
+            <input
+              type="text"
+              maxlength="12"
+              v-model="user_password"
+              @input="_inputPassword"
+              @click="_inputPassword"
+            />
+          </label>
+          <span style="color:red">*</span>
+        </td>
+        <td class="promptText">{{passwordPrompt}}</td>
       </tr>
 
-        <tr>
-          <td><label>性别：</label></td>
-          <td class="registerShow">
-              <select style="width:100px" v-model="user_sex">
-                  <option disabled selected value="">==请选择==</option>
-                  <option value="男">男</option>
-                  <option value="女">女</option>
-              </select>
-          </td>
-            <td></td>
+      <tr>
+        <td>
+          <label>确认密码：</label>
+        </td>
+        <td class="registerShow">
+          <label>
+            <input
+              type="text"
+              maxlength="12"
+              v-model="confirm_password"
+              @input="_inputConfirmPassword"
+              @click="_inputConfirmPassword"
+            />
+          </label>
+          <span style="color:red">*</span>
+        </td>
+        <td class="promptText">{{checkpasswordPrompt}}</td>
       </tr>
 
-        <tr>
-            <td><label>昵称：</label></td>
-            <td class="registerShow">
-                <label><input type="text" v-model="mall_name" maxlength="100" @input="_inputMallName" @click="_inputMallName"/></label>
-            </td>
-            <td class="promptText">{{mallnamePrompt}}</td>
-        </tr>
+      <tr>
+        <td>
+          <label>联系电话：</label>
+        </td>
+        <td class="registerShow">
+          <label>
+            <input
+              type="tel"
+              onkeyup="value=value.replace(/[^\d]/g,'')"
+              v-model="user_phone"
+              @click="_inputPhone"
+            />
+          </label>
+          <span style="color:red">*</span>
+        </td>
+        <td class="promptText">{{phonePrompt}}</td>
+      </tr>
 
-        <tr>
-            <td><label>地址：</label></td>
-            <td class="registerShow">
-              <label><input type="text" v-model="user_address" maxlength="50" /></label>
-            </td>
-            <td></td>
-       </tr>
+      <tr>
+        <td>
+          <label>邮箱：</label>
+        </td>
+        <td class="registerShow">
+          <label>
+            <input type="text" maxlength="50" v-model="user_email" @click="_inputEmail" />
+          </label>
+          <span style="color:red">*</span>
+        </td>
+        <td class="promptText">{{emailPrompt}}</td>
+      </tr>
 
+      <tr>
+        <td>
+          <label>姓名：</label>
+        </td>
+        <td class="registerShow">
+          <label>
+            <input
+              type="text"
+              v-model="act_name"
+              maxlength="50"
+              @input="_inputActName"
+              @click="_inputActName"
+            />
+          </label>
+        </td>
+        <td class="promptText">{{actnamePrompt}}</td>
+      </tr>
+
+      <tr>
+        <td>
+          <label>性别：</label>
+        </td>
+        <td class="registerShow">
+          <select style="width:100px" v-model="user_sex">
+            <option disabled selected value>==请选择==</option>
+            <option value="男">男</option>
+            <option value="女">女</option>
+          </select>
+        </td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td>
+          <label>昵称：</label>
+        </td>
+        <td class="registerShow">
+          <label>
+            <input
+              type="text"
+              v-model="mall_name"
+              maxlength="100"
+              @input="_inputMallName"
+              @click="_inputMallName"
+            />
+          </label>
+        </td>
+        <td class="promptText">{{mallnamePrompt}}</td>
+      </tr>
+
+      <tr>
+        <td>
+          <label>地址：</label>
+        </td>
+        <td class="registerShow">
+          <label>
+            <input type="text" v-model="user_address" maxlength="50" />
+          </label>
+        </td>
+        <td></td>
+      </tr>
     </table>
-      <br/>
-      <br/>
+    <br />
+    <br />
     <a>
-      <button type="submit" v-on:click="_register" style="margin-right:100px">注册 </button>
+      <button type="submit" v-on:click="_register" style="margin-right:100px">注册</button>
     </a>
     <router-link tag="a" :to="'/'">返回</router-link>
   </div>
 </template>
 
 <script>
-
 import axios from 'axios'
 
 export default {
-
   name: 'register',
 
   data () {
@@ -126,7 +191,6 @@ export default {
   },
 
   methods: {
-
     checkUserName () {
       return this.user_name === this.user_name.replace(/[^\d\a-zA-Z]/gi, '')
     },
@@ -146,14 +210,19 @@ export default {
     },
 
     checkActName () {
-      return this.act_name === this.act_name.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi, '')
+      return (
+        this.act_name === this.act_name.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi, '')
+      )
     },
 
     checkMallName () {
-      return this.mall_name === this.mall_name.replace(/[^\u4E00-\u9FA5\a-zA-Z0-9]/gi, '')
+      return (
+        this.mall_name ===
+        this.mall_name.replace(/[^\u4E00-\u9FA5\a-zA-Z0-9]/gi, '')
+      )
     },
 
-    _inputUserName: function () {
+    inputUserName: function () {
       if (!this.checkUserName()) {
         this.usernamePrompt = '用户名只能为数字和字母的组合'
         this.user_name = this.user_name.replace(/[^\d\a-zA-Z]/gi, '')
@@ -199,7 +268,10 @@ export default {
     _inputMallName: function () {
       if (!this.checkMallName()) {
         this.mallnamePrompt = '用户昵称只能由汉字、数字和字母的组成'
-        this.mall_name = this.mall_name.replace(/[^\u4E00-\u9FA5\a-zA-Z0-9]/gi, '')
+        this.mall_name = this.mall_name.replace(
+          /[^\u4E00-\u9FA5\a-zA-Z0-9]/gi,
+          ''
+        )
       } else {
         this.mallnamePrompt = ''
       }
@@ -216,11 +288,12 @@ export default {
     },
 
     addPassword () {
-      axios.post('/userInfo/addUser/', {
-        userId: '', // 在后端从user表中得到userId
-        userName: this.user_name,
-        userPassword: this.user_password
-      })
+      axios
+        .post('/userInfo/addUser/', {
+          userId: '', // 在后端从user表中得到userId
+          userName: this.user_name,
+          userPassword: this.user_password
+        })
         .then(function (response) {
           console.log(response)
           window.location.href = '/' // 新用户注册成功后在此处返回登录页面
@@ -256,16 +329,17 @@ export default {
         this.mallnamePrompt = '用户昵称只能由汉字、数字和字母的组成'
       } else {
         this.clearAllPrompt()
-        axios.post('/user/addUser/', {
-          userId: '',
-          userName: this.user_name,
-          userPhone: this.user_phone,
-          userRealName: this.act_name,
-          userMallName: this.mall_name,
-          userSex: this.user_sex,
-          userEmail: this.user_email,
-          userAddress: this.user_address
-        })
+        axios
+          .post('/user/addUser/', {
+            userId: '',
+            userName: this.user_name,
+            userPhone: this.user_phone,
+            userRealName: this.act_name,
+            userMallName: this.mall_name,
+            userSex: this.user_sex,
+            userEmail: this.user_email,
+            userAddress: this.user_address
+          })
           .then(response => {
             switch (response.data) {
               case 'userName false':
@@ -298,20 +372,27 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" scoped>
-  #register
-     float center
-     position absolute
-     width:1000px
-     left:50%
-     margin-left:-500px
-  .registerTable
-     text-align right
-     margin-left:250px
-  .registerShow
-     width 200px
-     text-align left
-  .promptText
-     font-size 14px
-     text-align left
-     color red
+#register {
+  float: center;
+  position: absolute;
+  width: 1000px;
+  left: 50%;
+  margin-left: -500px;
+}
+
+.registerTable {
+  text-align: right;
+  margin-left: 250px;
+}
+
+.registerShow {
+  width: 200px;
+  text-align: left;
+}
+
+.promptText {
+  font-size: 14px;
+  text-align: left;
+  color: red;
+}
 </style>

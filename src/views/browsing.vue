@@ -5,17 +5,15 @@
 </template>
 
 <script>
-export default {
-  name: 'browsing'
-}
+export default {}
 </script>
 
 <style lang="stylus">
 .browsing {
   margin-top: 10px;
-  margin-left: 33%;
-  width: 500px;
-  height: 350px;
+  margin-left: 22%;
+  width: 800px;
+  height: 650px;
 
   img {
     width: 100%;

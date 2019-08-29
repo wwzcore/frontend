@@ -7,6 +7,7 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
+  linkActiveClass: 'mui-active',
   routes: [
     {
       path: '/',
@@ -58,22 +59,21 @@ export default new Router({
   ]
 })
 
-  router.beforeEach((to, from, next) => {
-   if (to.matched.some(m => m.meta.auth)) {
-     // console.log("先判断是否登陆")；
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(m => m.meta.auth)) {
+    // console.log("先判断是否登陆")；
     // if ('host' === to.name) {
-     //  next()
-     //} else {
-       if (sessionStorage.getItem('getUserName')) {
-
-        next()
-      } else {
-        alert('您的登陆已过期，请重新登陆。'+to.name)
-         next('/login')
-       }
-     //}
-   } else {
-     //console.log('请先登陆')
-     next()
-   }
- })
+    //  next()
+    // } else {
+    if (sessionStorage.getItem('nameInSession')) {
+      next()
+    } else {
+      alert('您的登陆已过期，请重新登陆。' + to.name)
+      next('/login')
+    }
+    // }
+  } else {
+    // console.log('请先登陆')
+    next()
+  }
+})

@@ -110,7 +110,8 @@ export default {
               case 'Success':
                 alert('登录成功！')
                 // 把拿到的返回结果放在sessionStorage中
-                window.sessionStorage.setItem('getUserName', this.user_name)
+                window.sessionStorage.setItem('nameInSession', this.user_name)
+                alert(window.sessionStorage.getItem('nameInSession'))
                 // 得到用户名userName并存储在sessionStorage中
                 window.location.href = '/'
                 break

@@ -1,29 +1,29 @@
 <template>
   <div class="container">
     <header class="header">
-      <div class="headleft">
+      <div class="head_left">
         <div class="avatar">
           <img alt="logo" :src="require('../assets/'+userico+'.jpg')" />
         </div>
-        <div v-bind:class="[getUserName?'nav':'nav_h']">
-        <router-link :to="{name: 'browsing'}">我的京西</router-link>
-        <div class="menu">
-          <li>
-            <router-link :to="{name: 'info'}">个人资料</router-link>
-          </li>
-          <li>
-            <router-link :to="{name: 'address'}">收货地址</router-link>
-          </li>
+        <div v-bind:class="[userName?'nav':'nav_h']">
+          <router-link :to="{name: 'browsing'}">我的京西</router-link>
+          <ul class="menu">
+            <li>
+              <router-link :to="{name: 'info'}">个人资料</router-link>
+            </li>
+            <li>
+              <router-link :to="{name: 'address'}">收货地址</router-link>
+            </li>
+          </ul>
         </div>
       </div>
-      </div>
-      <div class="link" v-show="!getUserName">
+      <div class="link" v-show="!userName">
         <a href="/login">登录</a>
         <a href="/register">注册</a>
       </div>
-      <div class="link" v-show="getUserName">
-        <span>用户名:{{getUserName}}</span>
-        <span class="div_b" v-on:click="_out">退出登录</span>
+      <div class="link" v-show="userName">
+        <span>用户名:{{userName}}</span>
+        <span class="div_b" v-on:click="out">退出登录</span>
       </div>
     </header>
     <main>
@@ -34,40 +34,39 @@
 </template>
 
 <script>
-  import axios from 'axios'
+import axios from "axios";
 export default {
-  name: 'host',
+  name: "host",
 
-  data () {
+  data() {
     return {
-      getUserName: '',
-      userico:'header'
-    }
+      userName: "",
+      userico: "header"
+    };
   },
-  mounted: function () {
-    this.getUserName = sessionStorage.getItem("getUserName");
-      alert(this.getUserName)
-      userico = this.getUserName
-
+  mounted: function() {
+    this.userName = sessionStorage.getItem("nameInSession");
+    this.userico = this.userName;
   },
   methods: {
-    _out:function() {
-      axios.post('/userInfo/loginout/', {
-        userName: this.getUserName
-      })
+    out: function() {
+      axios
+        .post("/userInfo/loginout/", {
+          userName: this.userName
+        })
         .then(response => {
           window.sessionStorage.clear();
           console.log("退出登录，清空sessionStorage");
           alert(response.data.message);
-          window.location.href = '/';
+          window.location.href = "/";
         })
-        .catch(function (error) {
-          console.log(error)
-          alert('系统出错/userInfo/loginout')
-        })
+        .catch(function(error) {
+          console.log(error);
+          alert("系统出错/userInfo/loginout");
+        });
     }
   }
-}
+};
 </script>
 
 <style lang="stylus" >
@@ -75,7 +74,7 @@ export default {
   align-items: center;
   display: flex;
   flex-wrap: nowrap;
-  justify-content : space-between;
+  justify-content: space-between;
   background-color: #24292e;
   color: hsla(0, 0%, 100%, 0.7);
   font-size: 14px;
@@ -83,16 +82,19 @@ export default {
   padding: 9px;
   z-index: 32;
   position: relative;
-  .headleft{
+
+  .head_left {
     display: flex;
     flex-wrap: nowrap;
     position: relative;
     align-items: center;
+
     .avatar {
       width: 25px;
       height: 25px;
       margin-left: 15px;
       position: relative;
+
       img {
         width: 100%;
         height: 100%;
@@ -101,41 +103,59 @@ export default {
 
     .nav {
       font-weight: bold;
-      font-size: 20px;
+      font-size: 25px;
       position: relative;
       left: 10px;
       list-style: none;
+
+      a {
+        text-decoration: none;
+        color: #FFEC00;
+      }
 
       .menu {
         padding: 10px;
         display: none;
         position: absolute;
-        text-decoration: none;
-        text-transform: uppercase;
         white-space: nowrap;
+        margin-block-start: auto;
+
+        a {
+          text-decoration: none;
+        }
       }
     }
 
     &:hover {
       .menu {
+        text-decoraction: none;
+        position: absolute;
         display: block;
         background-color: #24292e;
+      }
+
+      a:hover, a:active {
+        background-color: #5E5E5E;
       }
     }
 
     .nav_h {
       font-weight: bold;
-      font-size: 20px;
+      font-size: 25px;
       position: relative;
       left: 10px;
       list-style: none;
+
+      a {
+        text-decoration: none;
+        color: #FFEC00;
+      }
 
       .menu {
         padding: 10px;
         display: none;
         position: absolute;
         text-decoration: none;
-        text-transform: uppercase;
         white-space: nowrap;
       }
     }
@@ -146,15 +166,13 @@ export default {
     right: 10px;
     list-style: none;
     font-weight: bold;
-    font-size: 20px
-
+    font-size: 17px;
 
     a:link, a:visited {
       color: #FFFFFF;
       text-align: center;
       padding: 6px;
       text-decoration: none;
-      text-transform: uppercase;
     }
 
     a:hover, a:active {
@@ -169,9 +187,11 @@ export default {
   width: 50px;
   height: 50px;
 }
-.div_b
-  cursor:pointer
-  margin-left:20px
-  text-decoration:underline
-  color: #1830b9
+
+.div_b {
+  cursor: pointer;
+  margin-left: 20px;
+  text-decoration: none;
+  color: #FFFFFF;
+}
 </style>
