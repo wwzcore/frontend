@@ -5,7 +5,7 @@
         <div class="avatar">
           <img alt="logo" :src="require('../assets/'+userico+'.jpg')" />
         </div>
-        <div v-bind:class="[getUserName?'nav':'nav_h']">
+        <div v-bind:class="[userName?'nav':'nav_h']">
           <router-link :to="{name: 'browsing'}">我的京西</router-link>
           <ul class="menu">
             <li>
@@ -17,12 +17,12 @@
           </ul>
         </div>
       </div>
-      <div class="link" v-show="!getUserName">
+      <div class="link" v-show="!userName">
         <a href="/login">登录</a>
         <a href="/register">注册</a>
       </div>
-      <div class="link" v-show="getUserName">
-        <span>用户名:{{getUserName}}</span>
+      <div class="link" v-show="userName">
+        <span>用户名:{{userName}}</span>
         <span class="div_b" v-on:click="out">退出登录</span>
       </div>
     </header>
@@ -34,38 +34,39 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-  name: 'host',
+  name: "host",
 
-  data () {
+  data() {
     return {
-      userico: 'header'
-    }
+      userName: "",
+      userico: "header"
+    };
   },
-  created: function () {
-    this.getUserName = sessionStorage.getItem('getUserName')
-    this.userico = this.getUserName
+  mounted: function() {
+    this.userName = sessionStorage.getItem("nameInSession");
+    this.userico = this.userName;
   },
   methods: {
-    out: function () {
+    out: function() {
       axios
-        .post('/userInfo/loginout/', {
-          userName: this.getUserName
+        .post("/userInfo/loginout/", {
+          userName: this.userName
         })
         .then(response => {
-          window.sessionStorage.clear()
-          console.log('退出登录，清空sessionStorage')
-          alert(response.data.message)
-          window.location.href = '/'
+          window.sessionStorage.clear();
+          console.log("退出登录，清空sessionStorage");
+          alert(response.data.message);
+          window.location.href = "/";
         })
-        .catch(function (error) {
-          console.log(error)
-          alert('系统出错/userInfo/loginout')
-        })
+        .catch(function(error) {
+          console.log(error);
+          alert("系统出错/userInfo/loginout");
+        });
     }
   }
-}
+};
 </script>
 
 <style lang="stylus" >
@@ -117,6 +118,7 @@ export default {
         display: none;
         position: absolute;
         white-space: nowrap;
+        margin-block-start: auto;
 
         a {
           text-decoration: none;
@@ -127,8 +129,13 @@ export default {
     &:hover {
       .menu {
         text-decoraction: none;
+        position: absolute;
         display: block;
         background-color: #24292e;
+      }
+
+      a:hover, a:active {
+        background-color: #5E5E5E;
       }
     }
 

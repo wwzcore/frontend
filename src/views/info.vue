@@ -86,14 +86,13 @@ export default {
   name: 'info',
   data () {
     return {
-      UserId: '1', // 从前端获得
       user: {},
       readonly: true
     }
   },
 
   mounted () {
-    this.getUserName = sessionStorage.getItem('getUserName')
+    this.getUserName = sessionStorage.getItem('nameInSession')
     this.getData()
   },
 
@@ -121,7 +120,7 @@ export default {
       axios
         .put('/user/updateUser/', this.user)
         .then(function (response) {
-          window.sessionStorage.setItem('getUserName', response.data.userName)
+          window.sessionStorage.setItem('nameInSession', response.data.userName)
           alert('修改成功')
           console.log(response)
           window.location.reload()
