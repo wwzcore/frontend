@@ -108,7 +108,6 @@ export default {
                 this.passwordPrompt = '密码错误！'
                 break
               case 'Success':
-                alert('登录成功！')
                 // 把拿到的返回结果放在sessionStorage中
                 window.sessionStorage.setItem('nameInSession', this.user_name)
                 alert(window.sessionStorage.getItem('nameInSession'))
