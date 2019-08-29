@@ -7,7 +7,7 @@ pipeline{
         LANG='C.UTF-8'
     }
     triggers{
-        pollSCM('H/30 * * * *')
+        pollSCM('H/10 * * * *')
     }
     stages {
         stage('Build') {
