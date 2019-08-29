@@ -5,9 +5,7 @@
 </template>
 
 <script>
-export default {
-  name: 'browsing'
-}
+export default {};
 </script>
 
 <style lang="stylus">
