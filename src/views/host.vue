@@ -44,7 +44,7 @@ export default {
       userico: 'header'
     }
   },
-  created () {
+  mounted () {
     this.userName = sessionStorage.getItem('nameInSession')
     this.userico = this.userName
   },
