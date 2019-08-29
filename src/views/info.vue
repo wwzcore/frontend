@@ -11,7 +11,6 @@
             onkeyup="value=value.replace(/[^\a-zA-Z0-9]/gi,'')"
             v-bind:disabled="readonly"
             maxlength="30"
-            id="Name"
           />
         </td>
         <td>*合法字符为字母、数字</td>
