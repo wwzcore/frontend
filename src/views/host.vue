@@ -34,39 +34,38 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
-  name: 'host',
+  name: "host",
 
-  data () {
+  data() {
     return {
-      userName: '',
-      userico: 'header'
-    }
+      userName: "",
+      userico: "header"
+    };
   },
-  mounted () {
-    this.userName = sessionStorage.getItem('nameInSession')
-    this.userico = this.userName
+  mounted() {
+    this.userName = sessionStorage.getItem("nameInSession");
+    this.userico = this.userName;
   },
   methods: {
-    out () {
-      axios
-        .post('/userInfo/loginout/', {
-          userName: this.userName
-        })
-        .then(response => {
-          window.sessionStorage.clear()
-          console.log('退出登录，清空sessionStorage')
-          alert(response.data.message)
-          window.location.href = '/'
-        })
-        .catch(function (error) {
-          console.log(error)
-          alert('系统出错/userInfo/loginout')
-        })
+    out() {
+        axios
+          .post("/userInfo/loginout/", {
+            userName: this.userName
+          })
+          .then(response => {
+            window.sessionStorage.clear();
+            console.log("退出登录，清空sessionStorage");
+            window.location.href = "/";
+          })
+          .catch(function(error) {
+            console.log(error);
+            alert("系统出错/userInfo/loginout");
+          });
     }
   }
-}
+};
 </script>
 
 <style lang="stylus" >
