@@ -106,7 +106,7 @@ export default {
   },
 
   mounted () {
-    this.getUserName = sessionStorage.getItem('nameInSession')
+    this.getUserName = sessionStorage.getItem("nameInSession");
     this.getData()
   },
 
