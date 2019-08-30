@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="container">
     <header class="header">
       <div class="head_left">
@@ -54,7 +54,8 @@ export default {
       userImgUrl:""
     };
   },
-  mounted: function() {
+
+  mounted() {
 
     this.userName = sessionStorage.getItem("nameInSession");
 
@@ -79,21 +80,21 @@ export default {
         })
     },
 
-    out: function() {
-      axios
-        .post("/userInfo/loginout/", {
-          userName: this.userName
-        })
-        .then(response => {
-          window.sessionStorage.clear();
-          console.log("退出登录，清空sessionStorage");
-          alert(response.data.message);
-          window.location.href = "/";
-        })
-        .catch(function(error) {
-          console.log(error);
-          alert("系统出错/userInfo/loginout");
-        });
+    out() {
+        axios
+          .post("/userInfo/loginout/", {
+            userName: this.userName
+          })
+          .then(response => {
+            window.sessionStorage.clear();
+            console.log("退出登录，清空sessionStorage");
+            window.location.href = "/";
+          })
+          .catch(function(error) {
+            console.log(error);
+            alert("系统出错/userInfo/loginout");
+          });
+
     }
   }
 };
