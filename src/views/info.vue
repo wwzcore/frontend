@@ -88,90 +88,90 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { EventBus } from '@/bus/event-bus'
+import axios from "axios";
+import { EventBus } from "@/bus/event-bus";
+import { check } from "@/checkfunction/check";
 
 export default {
-  data () {
+  data() {
     return {
       user: {},
       readonly: true,
       imgUrl: null,
       file: null
-    }
+    };
   },
 
-  mounted () {
-    this.nameForSendingToBackend = sessionStorage.getItem('nameInSession')
-    this.getData()
+  mounted() {
+    this.nameForSendingToBackend = sessionStorage.getItem("nameInSession");
+    this.getData();
   },
 
   methods: {
-    onChange (event) {
-      const inputElement = event.target
+    onChange(event) {
+      const inputElement = event.target;
       // 判断是否符合上传条件
-      if (inputElement.files.length === 0) return false
-      const file = inputElement.files[0]
+      if (inputElement.files.length === 0) return false;
+      const file = inputElement.files[0];
       /*
               this.imgUrl = URL.createObjectURL(file)
       */
-      this.file = file
+      this.file = file;
     },
-    upload () {
-      let formFile = new FormData()
-      formFile.append('uploadImage', this.file)
+    upload() {
+      let formFile = new FormData();
+      formFile.append("uploadImage", this.file);
 
       axios
-        .post('/user/upload', formFile)
+        .post("/user/upload", formFile)
         .then(res => {
-          this.imgUrl = res.data
-          console.log('success!')
+          this.imgUrl = res.data;
+          console.log("success!");
         })
         .catch(err => {
-          console.log(err)
-        })
+          console.log(err);
+        });
     },
-    getData () {
+    getData() {
       axios
-        .get('/user/getUseOne/userName=' + this.nameForSendingToBackend)
+        .get("/user/getUseOne/userName=" + this.nameForSendingToBackend)
         .then(response => {
-          this.user = response.data
+          this.user = response.data;
         })
-        .catch(function (error) {
-          console.log(error)
-        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
 
-    modify () {
-      this.readonly = false
+    modify() {
+      this.readonly = false;
     },
-    submit () {
-      let emailLegal = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
-      // let a = emailLegal.test(this.user.UserEmail);
-      if (!emailLegal.test(this.user.email)) {
-        return alert('邮件地址不合规！')
+    submit() {
+      let a = check(this.user)
+      if (a) {
+        alert(a.emailPrompt);
       }
 
-      this.user.imgUrl = this.imgUrl
+      this.user.imgUrl = this.imgUrl;
 
       axios
-        .put('/user/updateUser/', this.user)
-        .then((response) => {
-          window.sessionStorage.setItem('nameInSession', response.data.name)
-          alert('修改成功')
-          console.log(response)
-          EventBus.$emit('test', this.user)
+        .put("/user/updateUser/", this.user)
+        .then(response => {
+          window.sessionStorage.setItem("nameInSession", response.data.name);
+          alert("修改成功");
+          console.log(response);
+          EventBus.$emit("test", this.user);
           /*
           window.location.reload();
 */
         })
-        .catch(function (error) {
-          console.log(error)
-          alert('输入的信息有误！')
-        })
+        .catch(function(error) {
+          console.log(error);
+          alert("输入的信息有误！");
+        });
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -185,9 +185,9 @@ export default {
   border: 1px solid #000;
   text-align: center;
   width: 600px;
-  margin-right : auto;
+  margin-right: auto;
   margin-left: auto;
-  margin-top : 70px;
+  margin-top: 70px;
 
   table {
     margin: auto;
