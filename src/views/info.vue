@@ -89,7 +89,7 @@
 
 <script>
 import axios from 'axios'
-import { EventBus } from './event-bus'
+import { EventBus } from '@/bus/event-bus'
 
 export default {
   data () {
