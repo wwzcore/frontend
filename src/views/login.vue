@@ -96,8 +96,8 @@ export default {
         // 用户登录校验请求
         axios.post('/userInfo/login/', {
           userId: '',
-          userName: this.user_name,
-          userPassword: this.user_password
+          name: this.user_name,
+          password: this.user_password
         })
           .then(response => {
             switch (response.data) {
