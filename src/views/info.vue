@@ -8,7 +8,7 @@
           <td>
             <input
               type="text"
-              v-model="user.name"
+              v-model="user.userName"
               onkeyup="value=value.replace(/[^\a-zA-Z0-9]/gi,'')"
               v-bind:disabled="readonly"
               maxlength="30"
@@ -21,7 +21,7 @@
           <td>
             <input
               type="text"
-              v-model="user.phone"
+              v-model="user.userPhone"
               onkeyup="value=value.replace(/[^\d]/g,'')"
               v-bind:disabled="true"
             />
@@ -32,7 +32,7 @@
           <td>
             <input
               type="text"
-              v-model="user.mallName"
+              v-model="user.userMallName"
               onkeyup="value=value.replace(/[^\u4E00-\u9FA5\a-zA-Z0-9]/gi,'')"
               v-bind:disabled="readonly"
               maxlength="50"
@@ -44,7 +44,7 @@
         <tr>
           <td>邮箱:</td>
           <td>
-            <input type="text" v-model="user.email" v-bind:disabled="readonly" />
+            <input type="text" v-model="user.userEmail" v-bind:disabled="readonly" />
           </td>
         </tr>
         <tr>
@@ -52,7 +52,7 @@
           <td>
             <input
               type="text"
-              v-model="user.realName"
+              v-model="user.userRealName"
               onkeyup="value=value.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi,'')"
               v-bind:disabled="readonly"
               maxlength="50"
@@ -63,7 +63,7 @@
         <tr>
           <td>性别:</td>
           <td>
-            <select v-model="user.sex" v-bind:disabled="readonly">
+            <select v-model="user.userSex" v-bind:disabled="readonly">
               <option value="男">男</option>
               <option value="女">女</option>
             </select>
@@ -89,6 +89,8 @@
 
 <script>
 import axios from "axios";
+import { EventBus } from "./event-bus";
+
 export default {
   data() {
     return {
@@ -147,7 +149,7 @@ export default {
     submit() {
       let emailLegal = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
       // let a = emailLegal.test(this.user.UserEmail);
-      if (!emailLegal.test(this.user.Email)) {
+      if (!emailLegal.test(this.user.userEmail)) {
         return alert("邮件地址不合规！");
       }
 
@@ -155,11 +157,14 @@ export default {
 
       axios
         .put("/user/updateUser/", this.user)
-        .then(function(response) {
-          window.sessionStorage.setItem("nameInSession", response.data.Name);
+        .then((response) => {
+          window.sessionStorage.setItem("nameInSession", response.data.userName);
           alert("修改成功");
           console.log(response);
+          EventBus.$emit("test", this.user);
+/*
           window.location.reload();
+*/
         })
         .catch(function(error) {
           console.log(error);
