@@ -7,7 +7,7 @@ pipeline{
         LANG='C.UTF-8'
     }
     triggers{
-        pollSCM('H/10 * * * *')
+        //pollSCM('H/10 * * * *')
     }
     stages {
         stage('Build') {
@@ -19,6 +19,11 @@ pipeline{
                     yarn build
                     """
                 echo 'This is a build step' 
+            }
+        }
+        stage('Scan') {
+            steps{
+                echo 'This is a test step'  
             }
         }
         stage('Test') {
@@ -43,7 +48,7 @@ pipeline{
                 //保留产出物
                 archiveArtifacts artifacts: '*/*.tar', fingerprint: true
                 //清空工作区
-                cleanWs()
+                //cleanWs()
 
                
             }
