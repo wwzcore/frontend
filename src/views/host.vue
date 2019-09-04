@@ -3,7 +3,11 @@
     <header class="header">
       <div class="head_left">
         <div class="avatar">
+          <!--
           <img alt="logo" :src="require('../assets/'+userico+'.jpg')" />
+          -->
+          <img alt="logo" v-if="userImgUrl" :src="userImgUrl" />
+          <img alt="logo" v-else src="../assets/default.jpg" />
         </div>
         <div v-bind:class="[userName?'nav':'nav_h']">
           <router-link :to="{name: 'browsing'}">我的京西</router-link>
@@ -34,39 +38,66 @@
 </template>
 
 <script>
-import axios from "axios";
-export default {
-  name: "host",
+import axios from 'axios'
+import { EventBus } from '@/bus/event-bus'
 
-  data() {
+export default {
+  name: 'host',
+
+  data () {
     return {
-      userName: "",
-      userico: "header"
-    };
+      user: {},
+      userName: '',
+      userico: 'header',
+      userImgUrl: ''
+    }
   },
-  mounted: function() {
-    this.userName = sessionStorage.getItem("nameInSession");
-    this.userico = this.userName;
+
+  mounted () {
+    this.userName = sessionStorage.getItem('nameInSession')
+
+    this.userico = this.userName
+
+    this.getImg(this.userName)
+
+    EventBus.$on('test', msg => {
+      this.userImgUrl = msg.imgUrl
+      this.userName = msg.userName
+    })
   },
+
   methods: {
-    out: function() {
+    getImg (val) {
       axios
-        .post("/userInfo/loginout/", {
+        .get('/user/getUseOne/userName=' + val)
+        .then(response => {
+          this.userImgUrl = response.data.imgUrl
+          /*
+          alert('here ===='+ this.userImgUrl )
+*/
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    },
+
+    out () {
+      axios
+        .post('/userInfo/loginout/', {
           userName: this.userName
         })
         .then(response => {
-          window.sessionStorage.clear();
-          console.log("退出登录，清空sessionStorage");
-          alert(response.data.message);
-          window.location.href = "/";
+          window.sessionStorage.clear()
+          console.log('退出登录，清空sessionStorage')
+          window.location.href = '/'
         })
-        .catch(function(error) {
-          console.log(error);
-          alert("系统出错/userInfo/loginout");
-        });
+        .catch(function (error) {
+          console.log(error)
+          alert('系统出错/userInfo/loginout')
+        })
     }
   }
-};
+}
 </script>
 
 <style lang="stylus" >
