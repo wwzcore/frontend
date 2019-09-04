@@ -1,34 +1,31 @@
-export function check(user) {
-    let userPrompt = { emailPrompt:'', namePrompt:'', phonePrompt:'', mallNamePrompt:'', realNamePrompt:'', sexPrompt:'' }
-    this.userPrompt.emailPrompt = checkEmail(user.email)
-    let namePrompt = checkName(user.name)
-    let phonePrompt = checkPhone(user.phone)
-    let mallNamePrompt = checkMallName(user.mallName)
-    let realNamePrompt = checkRealName(user.realName)
-    let sexPrompt = checkSex(user.sex)
-    alert(userPrompt.emailPrompt)
-    return userPrompt
-
+export function check (user) {
+  if (!checkEmail(user.email)) { return false }
+  checkName(user.name)
+  checkPhone(user.phone)
+  checkMallName(user.mallName)
+  checkRealName(user.realName)
+  checkSex(user.sex)
 }
 
-function checkName(name) {
+function checkName (name) {
 }
 
-function checkEmail(email) {
-    let emailLegal = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
-    if (!emailLegal.test(email)) {
-        return ("邮件地址不合规！");
-    }
+function checkEmail (email) {
+  let emailLegal = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+  if (!emailLegal.test(email)) {
+    alert('邮件地址不合规！')
+    return (false)
+  }
 }
 
-function checkPhone(name) {
+function checkPhone (phone) {
 }
 
-function checkMallName(name) {
+function checkMallName (mallName) {
 }
 
-function checkRealName(name) {
+function checkRealName (realName) {
 }
 
-function checkSex(name) {
+function checkSex (sex) {
 }

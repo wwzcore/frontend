@@ -38,66 +38,66 @@
 </template>
 
 <script>
-import axios from "axios";
-import { EventBus } from "@/bus/event-bus";
+import axios from 'axios'
+import { EventBus } from '@/bus/event-bus'
 
 export default {
-  name: "host",
+  name: 'host',
 
-  data() {
+  data () {
     return {
       user: {},
-      userName: "",
-      userico: "header",
-      userImgUrl: ""
-    };
+      userName: '',
+      userico: 'header',
+      userImgUrl: ''
+    }
   },
 
-  mounted() {
-    this.userName = sessionStorage.getItem("nameInSession");
+  mounted () {
+    this.userName = sessionStorage.getItem('nameInSession')
 
-    this.userico = this.userName;
+    this.userico = this.userName
 
-    this.getImg(this.userName);
+    this.getImg(this.userName)
 
-    EventBus.$on("test", msg => {
-      this.userImgUrl = msg.imgUrl;
-      this.userName = msg.userName;
-    });
+    EventBus.$on('test', msg => {
+      this.userImgUrl = msg.imgUrl
+      this.userName = msg.userName
+    })
   },
 
   methods: {
-    getImg(val) {
+    getImg (val) {
       axios
-        .get("/user/getUseOne/userName=" + val)
+        .get('/user/getUseOne/userName=' + val)
         .then(response => {
-          this.userImgUrl = response.data.imgUrl;
+          this.userImgUrl = response.data.imgUrl
           /*
           alert('here ===='+ this.userImgUrl )
 */
         })
-        .catch(function(error) {
-          console.log(error);
-        });
+        .catch(function (error) {
+          console.log(error)
+        })
     },
 
-    out() {
+    out () {
       axios
-        .post("/userInfo/loginout/", {
+        .post('/userInfo/loginout/', {
           userName: this.userName
         })
         .then(response => {
-          window.sessionStorage.clear();
-          console.log("退出登录，清空sessionStorage");
-          window.location.href = "/";
+          window.sessionStorage.clear()
+          console.log('退出登录，清空sessionStorage')
+          window.location.href = '/'
         })
-        .catch(function(error) {
-          console.log(error);
-          alert("系统出错/userInfo/loginout");
-        });
+        .catch(function (error) {
+          console.log(error)
+          alert('系统出错/userInfo/loginout')
+        })
     }
   }
-};
+}
 </script>
 
 <style lang="stylus" >

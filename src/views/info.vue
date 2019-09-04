@@ -88,90 +88,90 @@
 </template>
 
 <script>
-import axios from "axios";
-import { EventBus } from "@/bus/event-bus";
-import { check } from "@/checkfunction/check";
+import axios from 'axios'
+import { EventBus } from '@/bus/event-bus'
+import { check } from '@/checkfunction/check'
 
 export default {
-  data() {
+  data () {
     return {
       user: {},
       readonly: true,
       imgUrl: null,
       file: null
-    };
+    }
   },
 
-  mounted() {
-    this.nameForSendingToBackend = sessionStorage.getItem("nameInSession");
-    this.getData();
+  mounted () {
+    this.nameForSendingToBackend = sessionStorage.getItem('nameInSession')
+    this.getData()
   },
 
   methods: {
-    onChange(event) {
-      const inputElement = event.target;
+    onChange (event) {
+      const inputElement = event.target
       // 判断是否符合上传条件
-      if (inputElement.files.length === 0) return false;
-      const file = inputElement.files[0];
+      if (inputElement.files.length === 0) return false
+      const file = inputElement.files[0]
       /*
               this.imgUrl = URL.createObjectURL(file)
       */
-      this.file = file;
+      this.file = file
     },
-    upload() {
-      let formFile = new FormData();
-      formFile.append("uploadImage", this.file);
+    upload () {
+      let formFile = new FormData()
+      formFile.append('uploadImage', this.file)
 
       axios
-        .post("/user/upload", formFile)
+        .post('/user/upload', formFile)
         .then(res => {
-          this.imgUrl = res.data;
-          console.log("success!");
+          this.imgUrl = res.data
+          console.log('success!')
         })
         .catch(err => {
-          console.log(err);
-        });
-    },
-    getData() {
-      axios
-        .get("/user/getUseOne/userName=" + this.nameForSendingToBackend)
-        .then(response => {
-          this.user = response.data;
+          console.log(err)
         })
-        .catch(function(error) {
-          console.log(error);
-        });
+    },
+    getData () {
+      axios
+        .get('/user/getUseOne/userName=' + this.nameForSendingToBackend)
+        .then(response => {
+          this.user = response.data
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     },
 
-    modify() {
-      this.readonly = false;
+    modify () {
+      this.readonly = false
     },
-    submit() {
-      let a = check(this.user)
-      if (a) {
-        alert(a.emailPrompt);
+    submit () {
+      if (!check(this.user)) {
+        return
       }
 
-      this.user.imgUrl = this.imgUrl;
+      this.user.imgUrl = this.imgUrl
+      alert(this.imgUrl)
 
       axios
-        .put("/user/updateUser/", this.user)
+        .put('/user/updateUser/', this.user)
         .then(response => {
-          window.sessionStorage.setItem("nameInSession", response.data.name);
-          alert("修改成功");
-          console.log(response);
-          EventBus.$emit("test", this.user);
+          window.sessionStorage.setItem('nameInSession', response.data.name)
+          alert('修改成功')
+          console.log(response)
+          EventBus.$emit('test', this.user)
           /*
           window.location.reload();
 */
         })
-        .catch(function(error) {
-          console.log(error);
-          alert("输入的信息有误！");
-        });
+        .catch(function (error) {
+          console.log(error)
+          alert('输入的信息有误！')
+        })
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
