@@ -68,7 +68,7 @@ router.beforeEach((to, from, next) => {
     if (sessionStorage.getItem('nameInSession')) {
       next()
     } else {
-      alert('您的登陆已过期，请重新登陆。' + to.name)
+      // alert('您的登陆已过期，请重新登陆。' + to.name)
       next('/login')
     }
     // }
