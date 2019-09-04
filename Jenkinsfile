@@ -23,7 +23,10 @@ pipeline{
         }
         stage('Scan') {
             steps{
-                echo 'This is a test step'  
+                echo 'This is a scan step'  
+                sh """
+                    sonar-scanner
+                """
             }
         }
         stage('Test') {
@@ -48,7 +51,7 @@ pipeline{
                 //保留产出物
                 archiveArtifacts artifacts: '*/*.tar', fingerprint: true
                 //清空工作区
-                //cleanWs()
+                cleanWs()
 
                
             }
