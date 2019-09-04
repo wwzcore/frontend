@@ -6,9 +6,9 @@ pipeline{
         JENKINS_HOME = '/home/frontend'
         LANG='C.UTF-8'
     }
-    triggers{
-        pollSCM('H/10 * * * *')
-    }
+    //triggers{
+        //pollSCM('H/10 * * * *')
+    //}
     stages {
         stage('Build') {
             steps{
@@ -19,6 +19,14 @@ pipeline{
                     yarn build
                     """
                 echo 'This is a build step' 
+            }
+        }
+        stage('Scan') {
+            steps{
+                echo 'This is a scan step'  
+                sh """
+                    sonar-scanner
+                """
             }
         }
         stage('Test') {
