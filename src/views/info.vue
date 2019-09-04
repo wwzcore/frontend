@@ -9,14 +9,13 @@
             <input
               type="text"
               v-model="user.name"
-              pattern="[A-z]{3}"
-              title="三个字母的国家代码" 
               v-bind:disabled="readonly"
               maxlength="30"
+              @blur="checkField(user.name, 'name')"
             />
           </td>
           <td>
-            <span v-show="errorMessage.name">*合法字符为字母、数字</span>
+            <span v-show="errorMessage.name.invalid">*合法字符为字母、数字</span>
           </td>
         </tr>
         <tr>
@@ -47,10 +46,10 @@
         <tr>
           <td>邮箱:</td>
           <td>
-            <input type="text" v-model="user.email" v-bind:disabled="readonly" />
+            <input type="text" v-model="user.email" v-bind:disabled="readonly" @blur="checkField(user.email, 'email')" />
           </td>
           <td>
-            <span v-show="errorMessage.email">*合法字符为字母、数字</span>
+            <span v-show="errorMessage.email.invalid">*合法字符为字母email、数字</span>
           </td>
         </tr>
         <tr>
@@ -106,8 +105,14 @@ export default {
       imgUrl: null,
       file: null,
       errorMessage: {
-        name: false,
-        email: false
+        name: {
+          pattern: /[0-9A-Za-z]{3,}/,
+          invalid: false
+        },
+        email: {
+          pattern: /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
+          invalid: false
+        }
       }
     };
   },
@@ -127,6 +132,9 @@ export default {
               this.imgUrl = URL.createObjectURL(file)
       */
       this.file = file;
+    },
+    checkField(field, errorField) {
+      this.errorMessage[errorField].invalid = !this.errorMessage[errorField].pattern.test(field);
     },
     upload() {
       let formFile = new FormData();
@@ -156,16 +164,21 @@ export default {
     modify() {
       this.readonly = false;
     },
+    validateForm() {
+      let invalid = false;
+      Object.keys(this.errorMessage).forEach(field => {
+        if (this.errorMessage[field].invalid) {
+          invalid = true;
+          return ;
+        }
+      });
+      return invalid;
+    },
     submit() {
-      const validateResult = check(this.user);
-      if (validateResult) {
-        this.errorMessage[validateResult.field] = true;
-        return;
+      let invalid = this.validateForm();
+      if (invalid) {
+        return alert('Error!');
       }
-      this.errorMessage = {
-        name: false,
-        email: false
-      };
 
       this.user.imgUrl = this.imgUrl;
       alert(this.imgUrl);
