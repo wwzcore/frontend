@@ -6,9 +6,9 @@ pipeline{
         JENKINS_HOME = '/home/frontend'
         LANG='C.UTF-8'
     }
-    triggers{
+    //triggers{
         //pollSCM('H/10 * * * *')
-    }
+    //}
     stages {
         stage('Build') {
             steps{
