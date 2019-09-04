@@ -11,7 +11,8 @@ module.exports = {
     '^.+\\.jsx?$': 'babel-jest'
   },
   transformIgnorePatterns: [
-    '/node_modules/'
+    '/node_modules/',
+    '/node_modules/(?!vue-awesome)' // 添加此⾏行行
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1'

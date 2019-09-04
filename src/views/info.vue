@@ -14,7 +14,9 @@
               maxlength="30"
             />
           </td>
-          <td>*合法字符为字母、数字</td>
+          <td>
+            <span v-show="errorMessage.name">*合法字符为字母、数字</span>
+          </td>
         </tr>
         <tr>
           <td>手机号:</td>
@@ -45,6 +47,9 @@
           <td>邮箱:</td>
           <td>
             <input type="text" v-model="user.email" v-bind:disabled="readonly" />
+          </td>
+          <td>
+            <span v-show="errorMessage.email">*合法字符为字母、数字</span>
           </td>
         </tr>
         <tr>
@@ -98,7 +103,11 @@ export default {
       user: {},
       readonly: true,
       imgUrl: null,
-      file: null
+      file: null,
+      errorMessage: {
+        name: false,
+        email: false
+      }
     }
   },
 
@@ -147,9 +156,16 @@ export default {
       this.readonly = false
     },
     submit () {
-      if (!check(this.user)) {
+      const validateResult = check(this.user);
+      if (validateResult) {
+        this.errorMessage[validateResult.field] = true;
         return
       }
+      this.errorMessage = {
+        name: false,
+        email: false
+      };
+
 
       this.user.imgUrl = this.imgUrl
       alert(this.imgUrl)
@@ -161,6 +177,7 @@ export default {
           alert('修改成功')
           console.log(response)
           EventBus.$emit('test', this.user)
+          window.location.reload()
           /*
           window.location.reload();
 */
