@@ -10,7 +10,6 @@
               type="text"
               v-model="user.name"
               v-bind:disabled="readonly"
-              maxlength="30"
               @blur="checkField(user.name, 'name')"
             />
           </td>
@@ -21,12 +20,7 @@
         <tr>
           <td>手机号:</td>
           <td>
-            <input
-              type="text"
-              v-model="user.phone"
-              onkeyup="value=value.replace(/[^\d]/g,'')"
-              v-bind:disabled="true"
-            />
+            <input type="text" v-model="user.phone" v-bind:disabled="true" />
           </td>
         </tr>
         <tr>
@@ -35,21 +29,26 @@
             <input
               type="text"
               v-model="user.mallName"
-              onkeyup="value=value.replace(/[^\u4E00-\u9FA5\a-zA-Z0-9]/gi,'')"
               v-bind:disabled="readonly"
-              maxlength="50"
-              id="Nickname"
+              @blur="checkField(user.mallName, 'mallName')"
             />
           </td>
-          <td>合法字符为汉字、字母、数字</td>
+          <td>
+            <span v-show="errorMessage.mallName.invalid">*合法字符为汉字、字母、数字</span>
+          </td>
         </tr>
         <tr>
           <td>邮箱:</td>
           <td>
-            <input type="text" v-model="user.email" v-bind:disabled="readonly" @blur="checkField(user.email, 'email')" />
+            <input
+              type="text"
+              v-model="user.email"
+              v-bind:disabled="readonly"
+              @blur="checkField(user.email, 'email')"
+            />
           </td>
           <td>
-            <span v-show="errorMessage.email.invalid">*合法字符为字母email、数字</span>
+            <span v-show="errorMessage.email.invalid">*邮箱不合法</span>
           </td>
         </tr>
         <tr>
@@ -58,12 +57,13 @@
             <input
               type="text"
               v-model="user.realName"
-              onkeyup="value=value.replace(/[^\u4E00-\u9FA5\a-zA-Z]/gi,'')"
               v-bind:disabled="readonly"
-              maxlength="50"
+              @blur="checkField(user.realName, 'realName')"
             />
           </td>
-          <td>合法字符为汉字、字母</td>
+          <td>
+            <span v-show="errorMessage.realName.invalid">*</span>
+          </td>
         </tr>
         <tr>
           <td>性别:</td>
@@ -93,12 +93,12 @@
 </template>
 
 <script>
-import axios from "axios";
-import { EventBus } from "@/bus/event-bus";
-import { check } from "@/checkfunction/check";
+import axios from 'axios'
+import { EventBus } from '@/bus/event-bus'
+import { check } from '@/checkfunction/check'
 
 export default {
-  data() {
+  data () {
     return {
       user: {},
       readonly: true,
@@ -106,102 +106,106 @@ export default {
       file: null,
       errorMessage: {
         name: {
-          pattern: /[0-9A-Za-z]{3,}/,
+          pattern: /^\w{30,}$/,
+          invalid: false
+        },
+        mallName: {
+          pattern: /[^\u4E00-\u9FA5\a-zA-Z0-9]/,
           invalid: false
         },
         email: {
           pattern: /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/,
           invalid: false
+        },
+        realName: {
+          pattern: /[^\u4E00-\u9FA5\a-zA-Z]/,
+          invalid: false
         }
       }
-    };
+    }
   },
 
-  mounted() {
-    this.nameForSendingToBackend = sessionStorage.getItem("nameInSession");
-    this.getData();
+  mounted () {
+    this.nameForSendingToBackend = sessionStorage.getItem('nameInSession')
+    this.getData()
   },
 
   methods: {
-    onChange(event) {
-      const inputElement = event.target;
+    onChange (event) {
+      const inputElement = event.target
       // 判断是否符合上传条件
-      if (inputElement.files.length === 0) return false;
-      const file = inputElement.files[0];
+      if (inputElement.files.length === 0) return false
+      const file = inputElement.files[0]
       /*
               this.imgUrl = URL.createObjectURL(file)
       */
-      this.file = file;
+      this.file = file
     },
-    checkField(field, errorField) {
-      this.errorMessage[errorField].invalid = !this.errorMessage[errorField].pattern.test(field);
+    checkField (field, errorField) {
+      this.errorMessage[errorField].invalid = !this.errorMessage[
+        errorField
+      ].pattern.test(field)
     },
-    upload() {
-      let formFile = new FormData();
-      formFile.append("uploadImage", this.file);
+    upload () {
+      let formFile = new FormData()
+      formFile.append('uploadImage', this.file)
 
       axios
-        .post("/user/upload", formFile)
+        .post('/user/upload', formFile)
         .then(res => {
-          this.imgUrl = res.data;
-          console.log("success!");
+          this.imgUrl = res.data
+          console.log('success!')
         })
         .catch(err => {
-          console.log(err);
-        });
-    },
-    getData() {
-      axios
-        .get("/user/getUseOne/userName=" + this.nameForSendingToBackend)
-        .then(response => {
-          this.user = response.data;
+          console.log(err)
         })
-        .catch(function(error) {
-          console.log(error);
-        });
     },
-
-    modify() {
-      this.readonly = false;
+    getData () {
+      axios
+        .get('/user/getUseOne/userName=' + this.nameForSendingToBackend)
+        .then(response => {
+          this.user = response.data
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     },
-    validateForm() {
-      let invalid = false;
+    modify () {
+      this.readonly = false
+    },
+    validateForm () {
+      let invalid = false
       Object.keys(this.errorMessage).forEach(field => {
         if (this.errorMessage[field].invalid) {
-          invalid = true;
-          return ;
+          invalid = true
         }
-      });
-      return invalid;
+      })
+      return invalid
     },
-    submit() {
-      let invalid = this.validateForm();
+    submit () {
+      let invalid = this.validateForm()
       if (invalid) {
-        return alert('Error!');
+        return alert('Error!')
       }
-
-      this.user.imgUrl = this.imgUrl;
-      alert(this.imgUrl);
+      this.user.imgUrl = this.imgUrl
+      alert(this.imgUrl)
 
       axios
-        .put("/user/updateUser/", this.user)
+        .put('/user/updateUser/', this.user)
         .then(response => {
-          window.sessionStorage.setItem("nameInSession", response.data.name);
-          alert("修改成功");
-          console.log(response);
-          EventBus.$emit("test", this.user);
-          window.location.reload();
-          /*
-          window.location.reload(); 
-*/
+          window.sessionStorage.setItem('nameInSession', response.data.name)
+          alert('修改成功')
+          console.log(response)
+          EventBus.$emit('test', this.user)
+          window.location.reload()
         })
-        .catch(function(error) {
-          console.log(error);
-          alert("输入的信息有误！");
-        });
+        .catch(function (error) {
+          console.log(error)
+          alert('输入的信息有误！')
+        })
     }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
