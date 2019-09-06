@@ -106,7 +106,7 @@ export default {
       file: null,
       errorMessage: {
         name: {
-          pattern: /^\w{30,}$/,
+          pattern: /^\w{5,}$/,
           invalid: false
         },
         mallName: {
@@ -141,11 +141,7 @@ export default {
       */
       this.file = file
     },
-    checkField (field, errorField) {
-      this.errorMessage[errorField].invalid = !this.errorMessage[
-        errorField
-      ].pattern.test(field)
-    },
+
     upload () {
       let formFile = new FormData()
       formFile.append('uploadImage', this.file)
@@ -173,19 +169,29 @@ export default {
     modify () {
       this.readonly = false
     },
+    checkField (field, errorField) {
+      this.errorMessage[errorField].invalid = !this.errorMessage[
+        errorField
+      ].pattern.test(field)
+    },
     validateForm () {
-      let invalid = false
+      let flagForCheckAllItem = []
       Object.keys(this.errorMessage).forEach(field => {
-        if (this.errorMessage[field].invalid) {
-          invalid = true
-        }
+        flagForCheckAllItem.push(this.errorMessage[field].invalid)
       })
-      return invalid
+      return flagForCheckAllItem.every(flag => flag === true)
+
+      // alert("到这里了")
+      // Object.keys(this.errorMessage).forEach(field => {
+      //   if (this.errorMessage[field].invalid) {
+      //     invalid = true;
+      //   }
+      // });
+      // return invalid;
     },
     submit () {
-      let invalid = this.validateForm()
-      if (invalid) {
-        return alert('Error!')
+      if (!this.validateForm()) {
+        return alert('输入内容不合法！')
       }
       this.user.imgUrl = this.imgUrl
       alert(this.imgUrl)
