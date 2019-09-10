@@ -46,7 +46,7 @@ export default new Router({
 
     {
       path: '/address/new',
-      name: 'New',
+      name: 'new',
       meta: { auth: true },
       component: () => import('./views/address/new.vue')
     },
@@ -55,6 +55,18 @@ export default new Router({
       name: 'edit',
       meta: { auth: true },
       component: () => import('./views/address/edit.vue')
+    },
+    {
+      path: '/apparel-products/index',
+      name: 'apparelIndex',
+      meta: { auth: false },
+      component: () => import('./views/apparel-products/index.vue')
+    },
+    {
+      path: '/address/edit',
+      name: 'digitalIndex',
+      meta: { auth: false },
+      component: () => import('./views/digital-products/index.vue')
     }
   ]
 })
