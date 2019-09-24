@@ -1,21 +1,51 @@
 <template>
   <div>
     <header>
-      <h3>京西商城</h3>
+      <div class="header-div">
+        <h1>京西商城</h1>
+      </div>
     </header>
     <main class="main">
       <div class="browsingheader">
         <span class="b-span">主题市场</span>
       </div>
-      <div class="b-theme">
+      <div class="b-list">
         <ul>
-          <li>
+          <li class="li-father">
             <router-link :to="{name:'apparelIndex'}">服装</router-link>
           </li>
-          <li>
-            <router-link :to="{name:'digitalIndex'}">数码</router-link>
+          <li class="li">
+            <router-link :to="{name:'apparelIndex'}">男装</router-link>|
+            <router-link :to="{name:'apparelIndex'}">女装</router-link>
           </li>
         </ul>
+        <ul>
+          <li class="li-father">
+            <router-link :to="{name:'digitalIndex'}">数码</router-link>
+          </li>
+          <li class="li">
+            <router-link :to="{name:'digitalIndex'}">手机</router-link>|
+            <router-link :to="{name:'digitalIndex'}">电脑</router-link>|
+            <router-link :to="{name:'digitalIndex'}">相机</router-link>
+          </li>
+        </ul>
+      </div>
+      <div class="browsingbody">
+        <div class="products">
+          <router-link :to="{name:'apparelIndex'}">服装</router-link>
+          <div>
+            <img class="bigimg" src="../assets/suancai.jpg" alt="apparel" />
+          </div>
+          <div>
+            <img class="smallimg" src="../assets/suancai.jpg" alt="apparel" />
+          </div>
+        </div>
+        <div class="products">
+          <router-link :to="{name:'digitalIndex'}">数码</router-link>
+          <div>
+            <img class="bigimg" src="../assets/suancai.jpg" alt="digital" />
+          </div>
+        </div>
       </div>
     </main>
   </div>
@@ -26,15 +56,22 @@ export default {};
 </script>
 
 <style lang="stylus" >
+.header-div {
+  margin: auto;
+  width: fit-content;
+}
+
 .main {
   position: relative;
   margin: auto;
   width: 80%;
+  height: fit-content;
+  padding: 10px;
 
   .browsingheader {
-    background-color: #FFF8DC;
-    color: #CD3333;
-    font-size: 18px;
+    background-color: #FF7F24;
+    color: #FFFFFF;
+    font-size: 20px;
     height: 40px;
     display: flex;
     flex-wrap: nowrap;
@@ -47,24 +84,70 @@ export default {};
     }
   }
 
-  .b-theme {
+  .b-list {
     margin-left: 20px;
     position: absolute;
+    height: fit-content;
+    width: 100px;
 
     ul {
+      padding-top: 2px;
       padding-left: 0px;
-      margin-top: 0px;
-      border: 1px solid #FFF8DC;
-      width: 72px;
-      li{float:left}
+      margin: auto;
+      height: 25px;
+
+      .li-father {
+        position: absolute;
+        float: left;
+        list-style: none;
+        border-bottom: solid 1px #FF7F24;
+      }
+
+      .li {
+        display: none;
+        list-style: none;
+      }
+
+      &:hover {
+        .li {
+          left: 45px;
+          padding: 5px;
+          border: solid 1px #FF7F24;
+          position: absolute;
+          display: block;
+          list-style: none;
+          white-space: nowrap;
+        }
+      }
 
       a {
         text-decoration: none;
         align-items: center;
+        color: #FF7F24;
       }
+    }
+  }
 
-      li {
-        list-style: none;
+  .browsingbody {
+    position: relative;
+    top: 80px;
+    background-color: #FF7F24;
+    display: flex;
+    background-color: #FFFFFF;
+
+    .products {
+      width: 500px;
+      height: 300px;
+      border: solid 1px #FF7F24;
+      white-space: nowrap;
+      margin: auto;
+      .bigimg {
+        width: 200px;
+        height: 200px;
+      }
+      .smallimg {
+        width: 180px;
+        height: 90px;
       }
     }
   }
