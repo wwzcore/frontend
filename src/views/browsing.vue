@@ -15,7 +15,7 @@
             <router-link :to="{name:'apparelIndex'}">服装</router-link>
           </li>
           <li class="li">
-            <router-link :to="{name:'apparelIndex'}">男装</router-link>|
+            <router-link :to="{name:'apparelIndex'}">男装</router-link>
             <router-link :to="{name:'apparelIndex'}">女装</router-link>
           </li>
         </ul>
@@ -24,26 +24,39 @@
             <router-link :to="{name:'digitalIndex'}">数码</router-link>
           </li>
           <li class="li">
-            <router-link :to="{name:'digitalIndex'}">手机</router-link>|
-            <router-link :to="{name:'digitalIndex'}">电脑</router-link>|
+            <router-link :to="{name:'digitalIndex'}">手机</router-link>
+            <router-link :to="{name:'digitalIndex'}">电脑</router-link>
             <router-link :to="{name:'digitalIndex'}">相机</router-link>
           </li>
         </ul>
       </div>
-      <div class="browsingbody">
+      <div class="browsing-body">
         <div class="products">
-          <router-link :to="{name:'apparelIndex'}">服装</router-link>
           <div>
-            <img class="bigimg" src="../assets/suancai.jpg" alt="apparel" />
+            <router-link :to="{name:'apparelIndex'}">服装</router-link>
           </div>
-          <div>
-            <img class="smallimg" src="../assets/suancai.jpg" alt="apparel" />
+          <div class="images-container">
+            <div>
+              <img class="big-img" src="../assets/suancai.jpg" alt="apparel" />
+            </div>
+            <div class="right-img">
+              <img class="small-img" src="../assets/suancai.jpg" alt="apparel" />
+              <img class="small-img" src="../assets/suancai.jpg" alt="apparel" />
+            </div>
           </div>
         </div>
         <div class="products">
-          <router-link :to="{name:'digitalIndex'}">数码</router-link>
           <div>
-            <img class="bigimg" src="../assets/suancai.jpg" alt="digital" />
+            <router-link :to="{name:'digitalIndex'}">数码</router-link>
+          </div>
+          <div class="images-container">
+            <div>
+              <img class="big-img" src="../assets/suancai.jpg" alt="apparel" />
+            </div>
+            <div class="right-img">
+              <img class="small-img" src="../assets/suancai.jpg" alt="apparel" />
+              <img class="small-img" src="../assets/suancai.jpg" alt="apparel" />
+            </div>
           </div>
         </div>
       </div>
@@ -52,7 +65,7 @@
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style lang="stylus" >
@@ -106,6 +119,7 @@ export default {};
       .li {
         display: none;
         list-style: none;
+        max-width: 50px;
       }
 
       &:hover {
@@ -128,7 +142,7 @@ export default {};
     }
   }
 
-  .browsingbody {
+  .browsing-body {
     position: relative;
     top: 80px;
     background-color: #FF7F24;
@@ -141,13 +155,27 @@ export default {};
       border: solid 1px #FF7F24;
       white-space: nowrap;
       margin: auto;
-      .bigimg {
+
+      .big-img {
         width: 200px;
         height: 200px;
+        display: block;
       }
-      .smallimg {
+
+      .small-img {
         width: 180px;
         height: 90px;
+      }
+
+      .images-container {
+        display: flex;
+        justify-content: space-evenly;
+
+        .right-img {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
       }
     }
   }
