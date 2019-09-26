@@ -1,43 +1,41 @@
 <template>
-  <div id="Login">
+  <div class="Login">
     <h1>来京西，有惊喜！</h1>
-    <br/><br/><br/><br/>
-    <div id="loginDiv">
-      <div id="tableDiv">
-      <br/><br/><br/>
-      <table id="loginTable">
-        <tr>
-          <td><label>用户名：</label></td>
-          <td class="loginShow">
-              <label><input type="text" id="AcctNo" v-model="user_name" maxlength="50" @click="_inputUsername"  @input="_inputUsername"/></label>
-          </td>
-          <td><span style="color:red">*</span></td>
-          <td>&nbsp;</td>
-          <td><label>密码：</label></td>
-          <td class="loginShow">
-              <label><input type="text" v-model="user_password" maxlength="12" @click="_inputPassword"/></label>
-          </td>
-          <td><span style="color:red">*</span></td>
-        </tr>
-        <tr>
-          <td>&nbsp;</td>
-          <td class="promptText"><span>{{usernamePrompt}}</span></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td class="promptText"><span>{{passwordPrompt}}</span></td>
-        </tr>
-      </table>
+    <div class="login-container">
+      <div class="login-main">
+        <div class="login-header">
+          <a>用户名登录</a>
+        </div>
+        <div class="login-info">
+          <div class="content">
+            <label>用户名：</label>
+            <input
+              type="text"
+              class="AcctNo"
+              v-model="user_name"
+              maxlength="50"
+              @click="_inputUsername"
+              @input="_inputUsername"
+            />
+            <span style="color:red">*</span>
+          </div>
+          <div class="promptText">
+            <span>{{usernamePrompt}}</span>
+          </div>
+          <div class="content">
+            <label>密码：</label>
+            <input type="text" v-model="user_password" maxlength="12" @click="_inputPassword" />
+            <span style="color:red">*</span>
+          </div>
+          <div class="content">
+            <button type="submit" class="loginButton" v-on:click="_commit">登录</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <br/><br/>
-    <a>
-      <button type="submit" class="loginButton" v-on:click="_commit">登录</button>
-    </a>
-    <router-link tag="a" :to="'/register'">注册</router-link>
-    <br/><br/>
-    <br/><br/><br/>
-  </div>
-    <h1 style="color: darkmagenta">{{ msg }}</h1>
+    <!-- <div class="loginDiv">
+      <router-link tag="a" :to="'/register'">注册</router-link>
+    </div>-->
   </div>
 </template>
 
@@ -45,12 +43,10 @@
 import axios from 'axios'
 
 export default {
-
   name: 'login',
 
   data () {
     return {
-      msg: '欢迎来到京西商城',
       user_name: '',
       user_password: '',
       usernamePrompt: '',
@@ -94,11 +90,12 @@ export default {
         this.usernamePrompt = ''
         this.passwordPrompt = ''
         // 用户登录校验请求
-        axios.post('/userInfo/login/', {
-          userId: '',
-          name: this.user_name,
-          password: this.user_password
-        })
+        axios
+          .post('/userInfo/login/', {
+            userId: '',
+            name: this.user_name,
+            password: this.user_password
+          })
           .then(response => {
             switch (response.data) {
               case 'No user':
@@ -130,36 +127,66 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" >
-  #Login
-      font-family 'Avenir', Helvetica, Arial, sans-serif
-      -webkit-font-smoothing antialiased
-      -moz-osx-font-smoothing grayscale
-      text-align center
-      float center
-      position absolute
-      width:600px
-      margin-left:-300px
-      left:50%
-      color #2c3e50
-  #loginDiv
-      height 220 px
-      border 1px solid #000
-      background yellow
-  #tableDiv
-      height 140 px
-  #loginTable
-      width:550px
-      text-align center
-      margin-left:25px
-  .loginShow
-      width 50px
-      text-align left
-  .loginButton
-      margin-right:80px
-  .promptText
-      font-size 14px
-      text-align left
-      color red
-  a
-      color: #42b983;
+.Login {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+
+  .login-container {
+    width: 100%;
+    height: 500px;
+    background-image: url('../assets/loginBack.jpg');
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .login-main {
+      width: 30%;
+      background: #fff;
+      padding: 25px;
+      box-sizing: border-box;
+      border: 2px solid #aaa;
+      border-radius: 10px;
+
+      .login-header {
+        font-size: 80%;
+        line-height: 40px;
+        border-bottom: 1px solid #e3e4e5;
+        color: #212121;
+        text-align: left;
+        font-weight: bold;
+      }
+
+      .login-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: auto;
+        border-bottom: 1px solid #e3e4e5;
+        padding: 25px;
+
+        .content {
+          margin: 15px;
+        }
+      }
+    }
+  }
+}
+
+.loginButton {
+  border: none;
+  line-height: 30px;
+  background-color: #ff7f24;
+  width: 80%;
+  color: #FFFFFF;
+}
+
+.promptText {
+  font-size: 14px;
+  text-align: left;
+  color: red;
+}
 </style>

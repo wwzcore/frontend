@@ -68,7 +68,6 @@ export default {
       axios
         .get('/receiver/list/userName=' + this.getUserName)
         .then(response => {
-          // this.itemList = JSON.parse(response.data);
           this.itemList = response.data
           console.log(typeof response.data)
         })

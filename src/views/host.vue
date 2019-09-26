@@ -72,9 +72,6 @@ export default {
         .get('/user/getUseOne/userName=' + val)
         .then(response => {
           this.userImgUrl = response.data.imgUrl
-          /*
-          alert('here ===='+ this.userImgUrl )
-*/
         })
         .catch(function (error) {
           console.log(error)
